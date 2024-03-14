@@ -14,6 +14,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.flyjingfish.shapeimageviewlib.GraphicsDrawable;
@@ -72,9 +73,9 @@ public class MyImageLoader {
     private void into(String url, ImageView iv, int w, int h, @DrawableRes int p, @DrawableRes int err, boolean isCircle, float radiusDp, boolean isBlur) {
         into(url, iv, w, h, p, err, isCircle, radiusDp, isBlur,null);
     }
-
     private void into(String url,ImageView iv, int w, int h, @DrawableRes int p, @DrawableRes int err, boolean isCircle, float radiusDp, boolean isBlur, OnImageLoadListener requestListener) {
         RequestBuilder<Drawable> requestBuilder = GlideApp.with(iv).load(url);
+        RequestOptions mRequestOptions = new RequestOptions();
         if (isBlur || isCircle || radiusDp != -1) {
             Transformation[] transformations = new Transformation[0];
             if (isBlur && !isCircle && radiusDp == -1) {
@@ -88,9 +89,9 @@ public class MyImageLoader {
             } else if (!isBlur && !isCircle && radiusDp != -1) {
                 transformations = new Transformation[]{new CenterCrop(), new RoundedCorners(dp2px(radiusDp))};
             }
-            RequestOptions mRequestOptions = new RequestOptions().transform(transformations);
+            mRequestOptions.transform(transformations);
 
-            requestBuilder.apply(mRequestOptions);
+
             if (w > 0 && h > 0)
                 mRequestOptions.override(w, h);
         } else if (w > 0 && h > 0) {
@@ -98,91 +99,44 @@ public class MyImageLoader {
         } else if (w == Target.SIZE_ORIGINAL && h == Target.SIZE_ORIGINAL) {
             requestBuilder.override(w, h);
         }
-        if (p != -1){
-            if (isCircle || radiusDp>0){
-                GraphicsDrawable graphicsDrawable = new GraphicsDrawable(iv);
-                graphicsDrawable.setDrawable(p);
-                graphicsDrawable.setRadius(dp2px(radiusDp));
-                graphicsDrawable.setShapeType(isCircle? GraphicsDrawable.ShapeType.OVAL: GraphicsDrawable.ShapeType.RECTANGLE);
-                requestBuilder.placeholder(graphicsDrawable);
-            }else {
-                GraphicsDrawable graphicsDrawable = new GraphicsDrawable(iv);
-                graphicsDrawable.setDrawable(p);
-                requestBuilder.placeholder(graphicsDrawable);
-            }
+        if (p != -1)
+            mRequestOptions.placeholder(p);
+        if (err != -1)
+            mRequestOptions.error(err);
+
+        requestBuilder.apply(mRequestOptions);
+        if (requestListener != null){
+            requestBuilder.addListener(new RequestListener<Drawable>() {
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                    requestListener.onFailed();
+                    return false;
+                }
+
+                @Override
+                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                    requestListener.onSuccess();
+                    return false;
+                }
+            });
         }
-        if (err != -1){
-            if (isCircle || radiusDp>0){
-                GraphicsDrawable graphicsDrawable = new GraphicsDrawable(iv);
-                graphicsDrawable.setDrawable(err);
-                graphicsDrawable.setRadius(dp2px(radiusDp));
-                graphicsDrawable.setShapeType(isCircle? GraphicsDrawable.ShapeType.OVAL: GraphicsDrawable.ShapeType.RECTANGLE);
-                requestBuilder.error(graphicsDrawable);
-            }else {
-                GraphicsDrawable graphicsDrawable = new GraphicsDrawable(iv);
-                graphicsDrawable.setDrawable(err);
-                requestBuilder.error(graphicsDrawable);
-            }
-        }
-//        if (p != -1)
-//            requestBuilder.placeholder(p);
-//        if (err != -1)
-//            requestBuilder.error(err);
-//        if (requestListener != null){
-//            requestBuilder.addListener(new RequestListener<Drawable>() {
-//                @Override
-//                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-//                    requestListener.onFailed();
-//                    return false;
-//                }
-//
-//                @Override
-//                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-//                    requestListener.onSuccess();
-//                    return false;
-//                }
-//            });
+//        GraphicsDrawable graphicsDrawable = new GraphicsDrawable(iv);
+//        graphicsDrawable.setFollowImageViewScaleType(false);
+//        graphicsDrawable.setBackgroundMode(true);
+//        if (isCircle || radiusDp>0){
+//            graphicsDrawable.setRadius(dp2px(radiusDp));
+//            graphicsDrawable.setShapeType(isCircle? GraphicsDrawable.ShapeType.OVAL: GraphicsDrawable.ShapeType.RECTANGLE);
 //        }
+//        requestBuilder.into(new GraphicsDrawableViewBackgroundTarget(graphicsDrawable));
+
+        GraphicsDrawable graphicsDrawable = new GraphicsDrawable(iv);
         if (isCircle || radiusDp>0){
-            GraphicsDrawable graphicsDrawable = new GraphicsDrawable(iv);
             graphicsDrawable.setRadius(dp2px(radiusDp));
             graphicsDrawable.setShapeType(isCircle? GraphicsDrawable.ShapeType.OVAL: GraphicsDrawable.ShapeType.RECTANGLE);
-            requestBuilder.addListener(new CustomDrawableListener(graphicsDrawable) {
-                @Override
-                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                    if (requestListener != null)
-                        requestListener.onFailed();
-                    return super.onLoadFailed(e, model, target, isFirstResource);
-                }
-
-                @Override
-                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                    if (requestListener != null)
-                        requestListener.onSuccess();
-                    return super.onResourceReady(resource, model, target, dataSource, isFirstResource);
-                }
-            });
-        }else {
-            GraphicsDrawable graphicsDrawable = new GraphicsDrawable(iv);
-            requestBuilder.addListener(new CustomDrawableListener(graphicsDrawable) {
-                @Override
-                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                    if (requestListener != null)
-                        requestListener.onFailed();
-                    return super.onLoadFailed(e, model, target, isFirstResource);
-                }
-
-                @Override
-                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                    if (requestListener != null)
-                        requestListener.onSuccess();
-                    return super.onResourceReady(resource, model, target, dataSource, isFirstResource);
-                }
-            });
         }
-
-        requestBuilder.into(iv);
+        requestBuilder.into(new GraphicsDrawableImageViewTarget(graphicsDrawable));
     }
+
 
     public interface OnImageLoadListener{
         void onSuccess();
