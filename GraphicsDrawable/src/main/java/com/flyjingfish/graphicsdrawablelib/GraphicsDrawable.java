@@ -25,7 +25,7 @@ import java.util.Locale;
 
 public class GraphicsDrawable extends Drawable {
     private final boolean isRtl;
-    private ShapeType mShapeType = ShapeType.CUSTOM;
+    private ShapeType mShapeType = ShapeType.NONE;
     private final Path mDrawPath = new Path();
     private final Paint mImagePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final PorterDuffXfermode SRC_IN = new PorterDuffXfermode(PorterDuff.Mode.SRC_IN);
@@ -54,7 +54,6 @@ public class GraphicsDrawable extends Drawable {
     private boolean mUseViewPadding = true;
     public GraphicsDrawable(View view) {
         this.mView = view;
-        mCustomDrawable = ContextCompat.getDrawable(view.getContext(),R.drawable.ic_vector_heart);
         isRtl = TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == LayoutDirection.RTL;
     }
 
