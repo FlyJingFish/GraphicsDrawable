@@ -17,6 +17,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.flyjingfish.graphicsdrawableglidelib.GraphicsDrawableImageViewTarget;
+import com.flyjingfish.graphicsdrawableglidelib.GraphicsDrawableViewBackgroundTarget;
 import com.flyjingfish.graphicsdrawablelib.GraphicsDrawable;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
@@ -120,20 +122,14 @@ public class MyImageLoader {
                 }
             });
         }
-//        GraphicsDrawable graphicsDrawable = new GraphicsDrawable(iv);
-//        graphicsDrawable.setFollowImageViewScaleType(false);
-//        graphicsDrawable.setBackgroundMode(true);
-//        if (isCircle || radiusDp>0){
-//            graphicsDrawable.setRadius(dp2px(radiusDp));
-//            graphicsDrawable.setShapeType(isCircle? GraphicsDrawable.ShapeType.OVAL: GraphicsDrawable.ShapeType.RECTANGLE);
-//        }
-//        requestBuilder.into(new GraphicsDrawableViewBackgroundTarget(graphicsDrawable));
+
 
         GraphicsDrawable graphicsDrawable = new GraphicsDrawable(iv);
         if (isCircle || radiusDp>0){
             graphicsDrawable.setRadius(dp2px(radiusDp));
             graphicsDrawable.setShapeType(isCircle? GraphicsDrawable.ShapeType.OVAL: GraphicsDrawable.ShapeType.RECTANGLE);
         }
+//        requestBuilder.into(new GraphicsDrawableViewBackgroundTarget(graphicsDrawable));
         requestBuilder.into(new GraphicsDrawableImageViewTarget(graphicsDrawable));
     }
 

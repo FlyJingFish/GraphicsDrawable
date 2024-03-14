@@ -1,3 +1,4 @@
 rootProject.name = "GraphicsDrawable"
 include ':app'
-include ':library'
+include ':GraphicsDrawable'
+include ':GraphicsDrawableGlideLib'

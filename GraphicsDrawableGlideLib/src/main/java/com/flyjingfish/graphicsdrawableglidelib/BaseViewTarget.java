@@ -1,4 +1,4 @@
-package com.flyjingfish.graphicsdrawable;
+package com.flyjingfish.graphicsdrawableglidelib;
 
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;

@@ -1,21 +1,21 @@
-package com.flyjingfish.graphicsdrawable;
+package com.flyjingfish.graphicsdrawableglidelib;
 
 import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
-import com.bumptech.glide.request.target.ImageViewTarget;
 import com.flyjingfish.graphicsdrawablelib.GraphicsDrawable;
 
-public class GraphicsDrawableImageViewTarget extends ImageViewTarget<Drawable> {
+public class GraphicsDrawableViewBackgroundTarget extends BaseViewTarget<Drawable> {
 
     private final GraphicsDrawable mGraphicsDrawable;
     private final GraphicsDrawable mStartGraphicsDrawable;
     private final GraphicsDrawable mFailedGraphicsDrawable;
 
-    public GraphicsDrawableImageViewTarget(GraphicsDrawable graphicsDrawable) {
-        super((ImageView) graphicsDrawable.getView());
+    public GraphicsDrawableViewBackgroundTarget(GraphicsDrawable graphicsDrawable) {
+        super(graphicsDrawable.getView());
+        graphicsDrawable.setFollowImageViewScaleType(false);
+        graphicsDrawable.setBackgroundMode(true);
         this.mGraphicsDrawable = graphicsDrawable;
         mStartGraphicsDrawable = graphicsDrawable.copy();
         mFailedGraphicsDrawable = graphicsDrawable.copy();
@@ -36,7 +36,9 @@ public class GraphicsDrawableImageViewTarget extends ImageViewTarget<Drawable> {
     @Override
     protected void setResource(@Nullable Drawable resource) {
         mGraphicsDrawable.setDrawable(resource);
-        view.setImageDrawable(mGraphicsDrawable);
+        view.setBackground(mGraphicsDrawable);
     }
+
+
 
 }
