@@ -1,4 +1,4 @@
-package com.flyjingfish.shapedrawable;
+package com.flyjingfish.graphicsdrawable;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.flyjingfish.shapedrawable.databinding.ActivityScaleTypeBinding;
+import com.flyjingfish.graphicsdrawable.databinding.ActivityScaleTypeBinding;
 
 
 public class ScaleTypeActivity extends AppCompatActivity {

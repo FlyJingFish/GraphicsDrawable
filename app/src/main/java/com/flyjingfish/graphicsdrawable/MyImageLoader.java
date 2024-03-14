@@ -1,4 +1,4 @@
-package com.flyjingfish.shapedrawable;
+package com.flyjingfish.graphicsdrawable;
 
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
@@ -17,7 +17,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.flyjingfish.shapeimageviewlib.GraphicsDrawable;
+import com.flyjingfish.graphicsdrawablelib.GraphicsDrawable;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 

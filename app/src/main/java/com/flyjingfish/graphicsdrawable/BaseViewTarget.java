@@ -1,4 +1,4 @@
-package com.flyjingfish.shapedrawable;
+package com.flyjingfish.graphicsdrawable;
 
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;

@@ -1,4 +1,4 @@
-package com.flyjingfish.shapedrawable.svg;
+package com.flyjingfish.graphicsdrawable.svg;
 
 import android.graphics.Picture;
 import android.graphics.drawable.PictureDrawable;

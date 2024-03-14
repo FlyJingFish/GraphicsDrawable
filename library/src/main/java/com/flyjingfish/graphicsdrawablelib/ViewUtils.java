@@ -1,4 +1,4 @@
-package com.flyjingfish.shapeimageviewlib;
+package com.flyjingfish.graphicsdrawablelib;
 
 import android.util.LayoutDirection;
 import android.view.View;

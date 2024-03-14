@@ -1,4 +1,4 @@
-package com.flyjingfish.shapedrawable;
+package com.flyjingfish.graphicsdrawable;
 
 import android.content.Context;
 import android.graphics.drawable.PictureDrawable;
@@ -10,8 +10,8 @@ import com.bumptech.glide.Registry;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;
 import com.caverock.androidsvg.SVG;
-import com.flyjingfish.shapedrawable.svg.SvgDecoder;
-import com.flyjingfish.shapedrawable.svg.SvgDrawableTranscoder;
+import com.flyjingfish.graphicsdrawable.svg.SvgDecoder;
+import com.flyjingfish.graphicsdrawable.svg.SvgDrawableTranscoder;
 
 import java.io.InputStream;
 

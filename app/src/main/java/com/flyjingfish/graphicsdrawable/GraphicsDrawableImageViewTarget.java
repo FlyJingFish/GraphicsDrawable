@@ -1,4 +1,4 @@
-package com.flyjingfish.shapedrawable;
+package com.flyjingfish.graphicsdrawable;
 
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.request.target.ImageViewTarget;
-import com.flyjingfish.shapeimageviewlib.GraphicsDrawable;
+import com.flyjingfish.graphicsdrawablelib.GraphicsDrawable;
 
 public class GraphicsDrawableImageViewTarget extends ImageViewTarget<Drawable> {
 

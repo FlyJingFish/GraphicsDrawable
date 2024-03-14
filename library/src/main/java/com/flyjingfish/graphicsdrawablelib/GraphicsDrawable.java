@@ -1,4 +1,4 @@
-package com.flyjingfish.shapeimageviewlib;
+package com.flyjingfish.graphicsdrawablelib;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;

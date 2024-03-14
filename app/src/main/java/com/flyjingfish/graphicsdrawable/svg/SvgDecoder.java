@@ -1,4 +1,4 @@
-package com.flyjingfish.shapedrawable.svg;
+package com.flyjingfish.graphicsdrawable.svg;
 
 import static com.bumptech.glide.request.target.Target.SIZE_ORIGINAL;
 

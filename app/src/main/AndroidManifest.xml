@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.flyjingfish.shapedrawable">
+    package="com.flyjingfish.graphicsdrawable">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="com.flyjingfish.shapedrawable.MyApplication"
+        android:name="com.flyjingfish.graphicsdrawable.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,10 +21,10 @@
             android:name="design_height_in_dp"
             android:value="640" />
 
-        <activity android:name="com.flyjingfish.shapedrawable.MainActivity">
+        <activity android:name="com.flyjingfish.graphicsdrawable.MainActivity">
 
         </activity>
-        <activity android:name="com.flyjingfish.shapedrawable.ScaleTypeActivity">
+        <activity android:name="com.flyjingfish.graphicsdrawable.ScaleTypeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

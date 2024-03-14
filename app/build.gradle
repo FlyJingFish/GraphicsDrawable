@@ -6,7 +6,7 @@ android {
     compileSdkVersion rootProject.ext.sdkVersion
 
     defaultConfig {
-        applicationId "com.flyjingfish.shapedrawable"
+        applicationId "com.flyjingfish.graphicsdrawable"
         minSdkVersion 21
         targetSdkVersion rootProject.ext.sdkVersion
         versionCode 1

@@ -1,16 +1,10 @@
-package com.flyjingfish.shapedrawable;
+package com.flyjingfish.graphicsdrawable;
 
 import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bumptech.glide.request.target.ImageViewTarget;
-import com.bumptech.glide.request.target.ViewTarget;
-import com.bumptech.glide.request.transition.Transition;
-import com.flyjingfish.shapeimageviewlib.GraphicsDrawable;
+import com.flyjingfish.graphicsdrawablelib.GraphicsDrawable;
 
 public class GraphicsDrawableViewBackgroundTarget extends BaseViewTarget<Drawable> {
 
