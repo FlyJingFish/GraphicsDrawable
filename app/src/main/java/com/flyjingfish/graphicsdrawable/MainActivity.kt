@@ -71,14 +71,17 @@ class MainActivity : AppCompatActivity() {
             val pic1Drawable = GraphicsDrawable(binding.iv1)
             pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
             pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
+
             val pic2Drawable = GraphicsDrawable(binding.iv2)
             pic2Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
             pic2Drawable.setRelativeRadius(MyImageLoader.dp2px(10f).toFloat(),MyImageLoader.dp2px(20f).toFloat(),MyImageLoader.dp2px(30f).toFloat(),MyImageLoader.dp2px(40f).toFloat())
+
             val pic3Drawable = GraphicsDrawable(binding.iv3)
             pic3Drawable.setShapeType(GraphicsDrawable.ShapeType.OVAL)
+
             val pic4Drawable = GraphicsDrawable(binding.iv4)
             pic4Drawable.setShapeType(GraphicsDrawable.ShapeType.CUSTOM)
-            pic4Drawable.customDrawable = resources.getDrawable(R.drawable.ic_vector_flower)
+            pic4Drawable.setCustomDrawable(resources.getDrawable(R.drawable.ic_vector_flower))
 
             MyImageLoader.load(itemData,binding.iv1,R.mipmap.img_load_placeholder,R.mipmap.img_load_placeholder,pic1Drawable)
             MyImageLoader.load(itemData,binding.iv2,R.mipmap.img_load_placeholder,R.mipmap.img_load_placeholder,pic2Drawable)

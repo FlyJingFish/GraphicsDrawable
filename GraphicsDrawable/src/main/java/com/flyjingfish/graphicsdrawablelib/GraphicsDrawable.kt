@@ -26,9 +26,8 @@ class GraphicsDrawable(val view: View) : Drawable() {
     private val mDrawPath = Path()
     private val mImagePaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val SRC_IN = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
-    var drawable: Drawable? = null
-        private set
-    var customDrawable: Drawable? = null
+    private var drawable: Drawable? = null
+    private var customDrawable: Drawable? = null
     private val mDrawRectF = RectF()
     private val mMatrixRectF = RectF()
     private val mMatrixRect = Rect()
@@ -50,7 +49,7 @@ class GraphicsDrawable(val view: View) : Drawable() {
     private val mTempSrc = RectF()
     private val mTempDst = RectF()
 
-    fun getScaleType(): ScaleType {
+    private fun getScaleType(): ScaleType {
         return if (mFollowImageViewScaleType && view is ImageView) {
             view.scaleType
         } else mScaleType ?: ScaleType.FIT_XY
@@ -101,8 +100,8 @@ class GraphicsDrawable(val view: View) : Drawable() {
             mImagePaint.xfermode = null
         } else if (mShapeType == ShapeType.CUSTOM) {
             canvas.saveLayer(mDrawRectF, mImagePaint, Canvas.ALL_SAVE_FLAG)
-            customDrawable!!.bounds = mDisplayRect
-            customDrawable!!.draw(canvas)
+            customDrawable?.bounds = mDisplayRect
+            customDrawable?.draw(canvas)
             mImagePaint.xfermode = SRC_IN
             canvas.saveLayer(mDrawRectF, mImagePaint, Canvas.ALL_SAVE_FLAG)
             mImagePaint.xfermode = null
@@ -281,27 +280,67 @@ class GraphicsDrawable(val view: View) : Drawable() {
         }
     }
 
+    /**
+     * 设置绘制的Drawable 资源Id
+     */
     fun setDrawable(@DrawableRes drawableRes: Int) {
         setDrawable(ContextCompat.getDrawable(view.context, drawableRes))
     }
 
+    /**
+     * 设置绘制的Drawable
+     */
     fun setDrawable(drawable: Drawable?) {
         this.drawable = drawable
         invalidateSelf()
     }
 
+    /**
+     * 设置自定义的显示形状的 资源Id
+     */
+    fun setCustomDrawable(@DrawableRes drawableRes: Int) {
+        setCustomDrawable(ContextCompat.getDrawable(view.context, drawableRes))
+    }
+
+    /**
+     * 设置自定义的显示形状
+     */
+    fun setCustomDrawable(drawable: Drawable?) {
+        this.customDrawable = drawable
+        invalidateSelf()
+    }
+
+    /**
+     * 设置是否是背景图模式
+     */
     fun setBackgroundMode(backgroundMode: Boolean) {
         mBackgroundMode = backgroundMode
     }
 
+    /**
+     * 设置是否跟随 ImageView 的 ScaleType 来显示图片
+     */
     fun setFollowImageViewScaleType(followImageViewScaleType: Boolean) {
         mFollowImageViewScaleType = followImageViewScaleType
     }
 
+    /**
+     * 设置自定义的 ScaleType 显示类型，设置此项之后您需要再次设置[setFollowImageViewScaleType]为 false ，才可生效
+     */
+    fun setScaleType(scaleType: ScaleType){
+        mScaleType = scaleType
+    }
+
+    /**
+     * 设置显示形状
+     */
     fun setShapeType(shapeType: ShapeType) {
         mShapeType = shapeType
     }
 
+    /**
+     * 设置4个角的圆角值
+     */
     fun setRadius(radius: Float) {
         mLeftTopRadius = radius
         mRightTopRadius = radius
@@ -310,6 +349,9 @@ class GraphicsDrawable(val view: View) : Drawable() {
         invalidateSelf()
     }
 
+    /**
+     * 分别设置4个角的圆角值
+     */
     fun setRadius(
         leftTopRadius: Float,
         rightTopRadius: Float,
@@ -323,6 +365,9 @@ class GraphicsDrawable(val view: View) : Drawable() {
         invalidateSelf()
     }
 
+    /**
+     * 分别设置4个角的圆角值
+     */
     fun setRelativeRadius(
         startTopRadius: Float,
         endTopRadius: Float,
@@ -336,10 +381,18 @@ class GraphicsDrawable(val view: View) : Drawable() {
         invalidateSelf()
     }
 
+    /**
+     * 设置是否适应 View 的 padding 值
+     */
     fun setUseViewPadding(useViewPadding: Boolean) {
         mUseViewPadding = useViewPadding
     }
 
+
+
+    /**
+     * 复制一个新的对象
+     */
     fun copy(): GraphicsDrawable {
         val graphicsDrawable = GraphicsDrawable(
             view
@@ -359,9 +412,9 @@ class GraphicsDrawable(val view: View) : Drawable() {
         graphicsDrawable.setShapeType(mShapeType)
         graphicsDrawable.customDrawable = customDrawable
         graphicsDrawable.mScaleType = mScaleType
-        graphicsDrawable.setFollowImageViewScaleType(mFollowImageViewScaleType)
-        graphicsDrawable.setBackgroundMode(mBackgroundMode)
-        graphicsDrawable.setUseViewPadding(mUseViewPadding)
+        graphicsDrawable.mFollowImageViewScaleType = mFollowImageViewScaleType
+        graphicsDrawable.mBackgroundMode = mBackgroundMode
+        graphicsDrawable.mUseViewPadding = mUseViewPadding
         return graphicsDrawable
     }
 }
