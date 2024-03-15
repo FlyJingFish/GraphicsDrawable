@@ -94,13 +94,13 @@ class GraphicsDrawable(val view: View) : Drawable() {
         }
         mDrawRectF[0f, 0f, view.width.toFloat()] = view.height.toFloat()
         if (mShapeType == ShapeType.OVAL || mShapeType == ShapeType.RECTANGLE) {
-            canvas.saveLayer(mDrawRectF, mImagePaint, Canvas.ALL_SAVE_FLAG)
+            canvas.saveLayer(mDrawRectF, mImagePaint)
             canvas.drawPath(mDrawPath, mImagePaint)
             mImagePaint.xfermode = SRC_IN
-            canvas.saveLayer(mDrawRectF, mImagePaint, Canvas.ALL_SAVE_FLAG)
+            canvas.saveLayer(mDrawRectF, mImagePaint)
             mImagePaint.xfermode = null
         } else if (mShapeType == ShapeType.CUSTOM) {
-            canvas.saveLayer(mDrawRectF, mImagePaint, Canvas.ALL_SAVE_FLAG)
+            canvas.saveLayer(mDrawRectF, mImagePaint)
             customDrawable?.bounds = mDisplayRect
             if (customDrawable is PictureDrawable) {
                 val pictureDrawable = customDrawable as PictureDrawable
@@ -124,7 +124,7 @@ class GraphicsDrawable(val view: View) : Drawable() {
             }
 
             mImagePaint.xfermode = SRC_IN
-            canvas.saveLayer(mDrawRectF, mImagePaint, Canvas.ALL_SAVE_FLAG)
+            canvas.saveLayer(mDrawRectF, mImagePaint)
             mImagePaint.xfermode = null
         }
 
