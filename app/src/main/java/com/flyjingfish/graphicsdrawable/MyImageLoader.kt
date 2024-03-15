@@ -56,8 +56,8 @@ object MyImageLoader {
         val requestBuilder = ImageRequest.Builder(iv.context)
             .data(url)
 
-        if (p != -1 && !backgroundMode) requestBuilder.placeholder(p)
-        if (err != -1 && !backgroundMode) requestBuilder.error(err)
+        if (p != -1) requestBuilder.placeholder(p)
+        if (err != -1) requestBuilder.error(err)
 
         if (useDrawable) {
             if (backgroundMode){
@@ -81,8 +81,8 @@ object MyImageLoader {
     ) {
         val requestBuilder: RequestBuilder<Drawable> = Glide.with(iv).load(url)
         val mRequestOptions = RequestOptions()
-        if (p != -1 && !backgroundMode) mRequestOptions.placeholder(p)
-        if (err != -1 && !backgroundMode) mRequestOptions.error(err)
+        if (p != -1) mRequestOptions.placeholder(p)
+        if (err != -1) mRequestOptions.error(err)
         requestBuilder.apply(mRequestOptions)
         if (useDrawable) {
             if (backgroundMode){
