@@ -28,17 +28,7 @@
 
 
 
-## 第一步，根目录build.gradle
-
-```gradle
-allprojects {
-    repositories {
-        ...
-        maven { url "https://s01.oss.sonatype.org/content/groups/public" }
-    }
-}
-```
-## 第二步，需要引用的build.gradle
+## 第一步、引入本库
 
 ```gradle
 dependencies {
@@ -50,7 +40,7 @@ dependencies {
     implementation 'io.github.FlyJingFish:GraphicsDrawableCoilLib:1.0.1'
 }
 ```
-## 第三步，使用说明
+## 第二步、使用说明
 
 ### 一、GraphicsDrawable 使用说明
 
@@ -163,7 +153,7 @@ imageLoader.enqueue(request)
 
 ```
 
-### 番外：使用 svg 资源图作为自定义图形
+### 四、番外：使用 svg 资源图作为自定义图形
 
 #### 如果想直接使用svg格式图可以这样做（不建议这样做，因为 svg 图可以直接转化为 vector 图，[点此查看转化说明](https://blog.csdn.net/u013077428/article/details/127613904)）
 
