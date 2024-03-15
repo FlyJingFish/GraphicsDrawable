@@ -43,11 +43,11 @@ allprojects {
 ```gradle
 dependencies {
     //必选项
-    implementation 'io.github.FlyJingFish:GraphicsDrawable:1.0.0'
+    implementation 'io.github.FlyJingFish:GraphicsDrawable:1.0.1'
     //可选项，如果您使用 Glide 则使用这个
-    implementation 'io.github.FlyJingFish:GraphicsDrawableGlideLib:1.0.0'
+    implementation 'io.github.FlyJingFish:GraphicsDrawableGlideLib:1.0.1'
     //可选项，如果您使用 Coil 则使用这个
-    implementation 'io.github.FlyJingFish:GraphicsDrawableCoilLib:1.0.0'
+    implementation 'io.github.FlyJingFish:GraphicsDrawableCoilLib:1.0.1'
 }
 ```
 ## 第三步，使用说明
