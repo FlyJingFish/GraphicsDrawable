@@ -52,7 +52,7 @@ dependencies {
 ```
 ## 第三步，使用说明
 
-# 一、GraphicsDrawable 使用说明
+### 一、GraphicsDrawable 使用说明
 
 | 方法名                         |              说明               |
 |-----------------------------|:-----------------------------:|
@@ -66,7 +66,7 @@ dependencies {
 | setRelativeRadius           |       设置矩形图的圆角值(适配 Rtl)       |
 | setUseViewPadding           |      设置是否适应View的padding       |
 
-# 二、Glide 使用
+### 二、Glide 使用
 
 - ImageView 的使用，以下例子默认跟随 ImageView 的 ScaleType 显示
 
@@ -102,7 +102,7 @@ Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsImageViewTa
 Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsViewBackgroundTarget(pic4Drawable))
 ```
 
-# 三、Coil 使用
+### 三、Coil 使用
 
 - ImageView 的使用，以下例子默认跟随 ImageView 的 ScaleType 显示
 - 
@@ -149,7 +149,7 @@ imageLoader.enqueue(request)
 
 ```
 
-# 番外：使用 svg 资源图作为自定义图形
+### 番外：使用 svg 资源图作为自定义图形
 
 #### 如果想直接使用svg格式图可以这样做（不建议这样做，因为 svg 图可以直接转化为 vector 图，[点此查看转化说明](https://blog.csdn.net/u013077428/article/details/127613904)）
 
