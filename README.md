@@ -15,6 +15,7 @@
 
 
 ## 特色功能
+
 1、**GraphicsDrawable** 支持圆形图案、圆角矩形图案、以及自定义图形，完美兼容所有的图片加载库
 
 2、**GraphicsDrawable** 矩形图片支持四个角独立设置角度值，矩形边框也支持四个角独立设置角度值
@@ -45,29 +46,13 @@ dependencies {
 # 一、GraphicsDrawable 使用说明
 
 ### GraphicsDrawable 示例
-```xml
-<com.flyjingfish.GraphicsDrawablelib.GraphicsDrawable
-    android:id="@+id/iv_centerCrop"
-    android:layout_width="110dp"
-    android:layout_height="110dp"
-    android:layout_marginStart="10dp"
-    android:padding="10dp"
-    app:FlyJFish_shape="rectangle"
-    app:FlyJFish_shape_border="rectangle"
-    app:FlyJFish_shape_border_width="3dp"
-    app:FlyJFish_shape_border_angle="45"
-    app:FlyJFish_shape_left_top_radius="8dp"
-    app:FlyJFish_shape_right_top_radius="12dp"
-    app:FlyJFish_shape_right_bottom_radius="16dp"
-    app:FlyJFish_shape_left_bottom_radius="20dp"
-    app:FlyJFish_shape_border_left_top_radius="10dp"
-    app:FlyJFish_shape_border_right_top_radius="15dp"
-    app:FlyJFish_shape_border_right_bottom_radius="20dp"
-    app:FlyJFish_shape_border_left_bottom_radius="25dp"
-    app:FlyJFish_shape_border_gradient="true"
-    app:FlyJFish_shape_border_startColor="@color/purple_200"
-    app:FlyJFish_shape_border_endColor="@color/teal_700"
-    android:scaleType="centerCrop" />
+
+设置各种圆角，圆形
+
+直接上硬菜
+
+```kotlin
+
 ```
 
 
