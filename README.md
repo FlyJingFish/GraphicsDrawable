@@ -57,31 +57,38 @@ dependencies {
 
 - 四个角相等的矩形圆角图
 ```kotlin
-val pic1Drawable = GraphicsDrawable(view)
-pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
-pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
-
+val graphicsDrawable = GraphicsDrawable(view)
+graphicsDrawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
+graphicsDrawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
 ```
 - 四个角不同的矩形圆角图
 ```kotlin
-val pic2Drawable = GraphicsDrawable(view)
-pic2Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
-pic2Drawable.setRelativeRadius(MyImageLoader.dp2px(10f).toFloat(),MyImageLoader.dp2px(20f).toFloat(),MyImageLoader.dp2px(30f).toFloat(),MyImageLoader.dp2px(40f).toFloat())
+val graphicsDrawable = GraphicsDrawable(view)
+graphicsDrawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
+graphicsDrawable.setRelativeRadius(MyImageLoader.dp2px(10f).toFloat(),MyImageLoader.dp2px(20f).toFloat(),MyImageLoader.dp2px(30f).toFloat(),MyImageLoader.dp2px(40f).toFloat())
 
 ```
 - 圆形图
 ```kotlin
-val pic3Drawable = GraphicsDrawable(view)
-pic3Drawable.setShapeType(GraphicsDrawable.ShapeType.OVAL)
+val graphicsDrawable = GraphicsDrawable(view)
+graphicsDrawable.setShapeType(GraphicsDrawable.ShapeType.OVAL)
 
 ```
 - 自定义图形
 ```kotlin
-val pic4Drawable = GraphicsDrawable(view)
-pic4Drawable.setShapeType(GraphicsDrawable.ShapeType.CUSTOM)
-pic4Drawable.setCustomDrawable(resources.getDrawable(R.drawable.ic_vector_flower))
+val graphicsDrawable = GraphicsDrawable(view)
+graphicsDrawable.setShapeType(GraphicsDrawable.ShapeType.CUSTOM)
+graphicsDrawable.setCustomDrawable(resources.getDrawable(R.drawable.ic_vector_flower))
 
 ```
+- 将上述配置好的 GraphicsDrawable 设置给 View
+```kotlin
+//设置实际想要显示的Drawable
+graphicsDrawable.setDrawable(d)
+//给 view 设置 GraphicsDrawable 即可显示
+view.setImageDrawable(graphicsDrawable)
+```
+
 ### 二、Glide 使用
 
 - ImageView 的使用，以下例子默认跟随 ImageView 的 ScaleType 显示
