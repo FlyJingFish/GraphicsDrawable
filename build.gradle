@@ -87,6 +87,8 @@ def updateREADME(readme,oldVersionName,newVersionName) {
     File configFile = new File(readme)
     String exportText = configFile.text
     String text = exportText.replaceAll("io.github.FlyJingFish:GraphicsDrawable:"+oldVersionName,"io.github.FlyJingFish:GraphicsDrawable:"+newVersionName)
+    text = text.replaceAll("io.github.FlyJingFish:GraphicsDrawableCoilLib:"+oldVersionName,"io.github.FlyJingFish:GraphicsDrawableCoilLib:"+newVersionName)
+    text = text.replaceAll("io.github.FlyJingFish:GraphicsDrawableGlideLib:"+oldVersionName,"io.github.FlyJingFish:GraphicsDrawableGlideLib:"+newVersionName)
     configFile.write(text)
 }
 
