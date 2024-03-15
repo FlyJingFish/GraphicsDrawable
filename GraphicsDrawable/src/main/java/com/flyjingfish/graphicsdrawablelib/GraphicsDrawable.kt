@@ -11,6 +11,7 @@ import android.graphics.PorterDuffXfermode
 import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.PictureDrawable
 import android.util.LayoutDirection
 import android.view.View
 import android.widget.ImageView
@@ -101,11 +102,32 @@ class GraphicsDrawable(val view: View) : Drawable() {
         } else if (mShapeType == ShapeType.CUSTOM) {
             canvas.saveLayer(mDrawRectF, mImagePaint, Canvas.ALL_SAVE_FLAG)
             customDrawable?.bounds = mDisplayRect
-            customDrawable?.draw(canvas)
+            if (customDrawable is PictureDrawable) {
+                val pictureDrawable = customDrawable as PictureDrawable
+                val scaleX: Float =
+                    pictureDrawable.bounds.width() * 1f / pictureDrawable.intrinsicWidth
+                val scaleY: Float =
+                    pictureDrawable.bounds.height() * 1f / pictureDrawable.intrinsicHeight
+                canvas.translate(
+                    pictureDrawable.bounds.left.toFloat(),
+                    pictureDrawable.bounds.top.toFloat()
+                )
+                canvas.scale(scaleX, scaleY)
+                canvas.drawPicture(pictureDrawable.picture)
+                canvas.scale(1 / scaleX, 1 / scaleY)
+                canvas.translate(
+                    -pictureDrawable.bounds.left.toFloat(),
+                    -pictureDrawable.bounds.top.toFloat()
+                )
+            } else {
+                customDrawable?.draw(canvas)
+            }
+
             mImagePaint.xfermode = SRC_IN
             canvas.saveLayer(mDrawRectF, mImagePaint, Canvas.ALL_SAVE_FLAG)
             mImagePaint.xfermode = null
         }
+
         drawable.bounds = mMatrixRect
         drawable.draw(canvas)
     }

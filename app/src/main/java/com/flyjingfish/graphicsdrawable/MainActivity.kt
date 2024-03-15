@@ -1,15 +1,21 @@
 package com.flyjingfish.graphicsdrawable
 
+import android.content.ContentResolver
 import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.PictureDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.ImageView.ScaleType
 import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.RadioGroup.OnCheckedChangeListener
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.flyjingfish.graphicsdrawable.databinding.ActivityMainBinding
 import com.flyjingfish.graphicsdrawablelib.GraphicsDrawable
 
@@ -81,13 +87,36 @@ class MainActivity : AppCompatActivity() {
 
             val pic4Drawable = GraphicsDrawable(binding.iv4)
             pic4Drawable.setShapeType(GraphicsDrawable.ShapeType.CUSTOM)
-            pic4Drawable.setCustomDrawable(resources.getDrawable(R.drawable.ic_vector_flower))
+//            pic4Drawable.setCustomDrawable(resources.getDrawable(R.drawable.ic_vector_flower))
+
+            val uri = Uri.parse(
+                ContentResolver.SCHEME_ANDROID_RESOURCE
+                        + "://"
+                        + packageName
+                        + "/"
+                        + R.raw.dog_heart
+            )
+            Glide.with(this)
+                .`as`(PictureDrawable::class.java)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .load(uri).into(object : CustomTarget<PictureDrawable?>() {
+
+                    override fun onResourceReady(
+                        resource: PictureDrawable,
+                        transition: Transition<in PictureDrawable?>?
+                    ) {
+                        pic4Drawable.setCustomDrawable(resource)
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {}
+                })
 
             MyImageLoader.load(itemData,binding.iv1,R.mipmap.img_load_placeholder,R.mipmap.img_load_placeholder,pic1Drawable)
             MyImageLoader.load(itemData,binding.iv2,R.mipmap.img_load_placeholder,R.mipmap.img_load_placeholder,pic2Drawable)
             MyImageLoader.load(itemData,binding.iv3,R.mipmap.img_load_placeholder,R.mipmap.img_load_placeholder,pic3Drawable)
             MyImageLoader.load(itemData,binding.iv4,R.mipmap.img_load_placeholder,R.mipmap.img_load_placeholder,pic4Drawable)
         },400L)
+
 
 
     }

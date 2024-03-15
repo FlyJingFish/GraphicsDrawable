@@ -149,6 +149,149 @@ imageLoader.enqueue(request)
 
 ```
 
+# 番外：使用 svg 资源图作为自定义图形
+
+#### 如果想直接使用svg格式图可以这样做（不建议这样做，因为 svg 图可以直接转化为 vector 图，[点此查看转化说明](https://blog.csdn.net/u013077428/article/details/127613904)）
+
+引用三方解析包
+
+```gradle
+dependencies {
+    implementation 'com.caverock:androidsvg-aar:1.4'
+}
+```
+
+**新增如下两个类**
+
+- [SvgDecoder](https://github.com/FlyJingFish/GraphicsDrawable/tree/master/app/src/main/java/com/flyjingfish/GraphicsDrawable/svg/SvgDecoder.java)
+
+```java
+public class SvgDecoder implements ResourceDecoder<InputStream, SVG> {
+
+    @Override
+    public boolean handles(@NonNull InputStream source, @NonNull Options options) {
+        // TODO: Can we tell?
+        return true;
+    }
+
+    public Resource<SVG> decode(
+            @NonNull InputStream source, int width, int height, @NonNull Options options)
+            throws IOException {
+        try {
+            SVG svg = SVG.getFromInputStream(source);
+            if (width != SIZE_ORIGINAL) {
+                svg.setDocumentWidth(width);
+            }
+            if (height != SIZE_ORIGINAL) {
+                svg.setDocumentHeight(height);
+            }
+            return new SimpleResource<>(svg);
+        } catch (SVGParseException ex) {
+            throw new IOException("Cannot load SVG from stream", ex);
+        }
+    }
+}
+```
+
+- [SvgDrawableTranscoder](https://github.com/FlyJingFish/GraphicsDrawable/tree/master/app/src/main/java/com/flyjingfish/GraphicsDrawable/svg/SvgDrawableTranscoder.java)
+
+```java
+public class SvgDrawableTranscoder implements ResourceTranscoder<SVG, PictureDrawable> {
+    @Nullable
+    @Override
+    public Resource<PictureDrawable> transcode(
+            @NonNull Resource<SVG> toTranscode, @NonNull Options options) {
+        SVG svg = toTranscode.get();
+        Picture picture = svg.renderToPicture();
+        PictureDrawable drawable = new PictureDrawable(picture);
+        return new SimpleResource<>(drawable);
+    }
+}
+```
+
+**新增glide配置**
+
+[MyAppGlideModule](https://github.com/FlyJingFish/GraphicsDrawable/tree/master/app/src/main/java/com/flyjingfish/GraphicsDrawable/svg/MyAppGlideModule.java)
+
+```java
+
+@GlideModule
+public class MyAppGlideModule extends AppGlideModule {
+
+    @Override
+    public void registerComponents(
+            @NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
+        registry
+                .register(SVG.class, PictureDrawable.class, new SvgDrawableTranscoder())
+                .append(InputStream.class, SVG.class, new SvgDecoder());
+    }
+
+    @Override
+    public boolean isManifestParsingEnabled() {
+        return false;
+    }
+}
+
+```
+
+**开始使用svg**
+
+- 本地资源
+
+```kotlin
+val pic4Drawable = GraphicsDrawable(binding.iv4)
+pic4Drawable.setShapeType(GraphicsDrawable.ShapeType.CUSTOM)
+
+val uri = Uri.parse(
+    ContentResolver.SCHEME_ANDROID_RESOURCE
+            + "://"
+            + packageName
+            + "/"
+            + R.raw.dog_heart
+)
+Glide.with(this)
+    .`as`(PictureDrawable::class.java)
+    .transition(DrawableTransitionOptions.withCrossFade())
+    .load(uri).into(object : CustomTarget<PictureDrawable?>() {
+
+        override fun onResourceReady(
+            resource: PictureDrawable,
+            transition: Transition<in PictureDrawable?>?
+        ) {
+            pic4Drawable.setCustomDrawable(resource)
+        }
+
+        override fun onLoadCleared(placeholder: Drawable?) {}
+    })
+```
+
+- 网络资源
+
+```kotlin
+
+
+val pic4Drawable = GraphicsDrawable(binding.iv4)
+pic4Drawable.setShapeType(GraphicsDrawable.ShapeType.CUSTOM)
+
+val uri = Uri.parse("http://www.clker.com/cliparts/u/Z/2/b/a/6/android-toy-h.svg")
+Glide.with(this)
+    .`as`(PictureDrawable::class.java)
+    .transition(DrawableTransitionOptions.withCrossFade())
+    .load(uri).into(object : CustomTarget<PictureDrawable?>() {
+
+        override fun onResourceReady(
+            resource: PictureDrawable,
+            transition: Transition<in PictureDrawable?>?
+        ) {
+            pic4Drawable.setCustomDrawable(resource)
+        }
+
+        override fun onLoadCleared(placeholder: Drawable?) {}
+    })
+```
+
+
+
 
 # 最后推荐我写的另一个库，轻松实现在应用内点击小图查看大图的动画放大效果
 
