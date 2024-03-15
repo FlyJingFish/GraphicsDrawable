@@ -3,14 +3,13 @@ package com.flyjingfish.graphicsdrawableglidelib
 import android.graphics.drawable.Drawable
 import com.flyjingfish.graphicsdrawablelib.GraphicsDrawable
 
-class GlideGraphicsViewBackgroundTarget(graphicsDrawable: GraphicsDrawable) :
+open class GlideGraphicsViewBackgroundTarget(graphicsDrawable: GraphicsDrawable) :
     BaseViewTarget<Drawable>(graphicsDrawable.view) {
     private val mGraphicsDrawable: GraphicsDrawable
     private val mStartGraphicsDrawable: GraphicsDrawable
     private val mFailedGraphicsDrawable: GraphicsDrawable
 
     init {
-        graphicsDrawable.setFollowImageViewScaleType(false)
         graphicsDrawable.setBackgroundMode(true)
         mGraphicsDrawable = graphicsDrawable
         mStartGraphicsDrawable = graphicsDrawable.copy()

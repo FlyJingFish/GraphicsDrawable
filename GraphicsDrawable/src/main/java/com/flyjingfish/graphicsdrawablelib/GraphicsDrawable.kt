@@ -20,8 +20,10 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.text.TextUtilsCompat
 import java.util.Locale
+import kotlin.math.max
+import kotlin.math.min
 
-class GraphicsDrawable(val view: View) : Drawable() {
+open class GraphicsDrawable(val view: View) : Drawable() {
     private val isRtl: Boolean = TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == LayoutDirection.RTL
     private var mShapeType = ShapeType.NONE
     private val mDrawPath = Path()
@@ -43,15 +45,14 @@ class GraphicsDrawable(val view: View) : Drawable() {
     private var mLeftBottomRadius = 0f
     private var mRightTopRadius = 0f
     private var mRightBottomRadius = 0f
-    private var mFollowImageViewScaleType = true
     private var mBackgroundMode = false
     private var mScaleType: ScaleType? = null
-    private var mUseViewPadding = true
+    private var mUseViewPadding = false
     private val mTempSrc = RectF()
     private val mTempDst = RectF()
 
     private fun getScaleType(): ScaleType {
-        return if (mFollowImageViewScaleType && view is ImageView) {
+        return if (!mBackgroundMode && view is ImageView) {
             view.scaleType
         } else mScaleType ?: ScaleType.FIT_XY
     }
@@ -260,17 +261,17 @@ class GraphicsDrawable(val view: View) : Drawable() {
             val paddingTop = getViewPaddingTop().toFloat()
             val paddingRight = getViewPaddingRight().toFloat()
             val paddingBottom = getViewPaddingBottom().toFloat()
-            left = Math.max(mMatrixRectF.left, paddingLeft)
-            top = Math.max(mMatrixRectF.top, paddingTop)
-            right = Math.min(mMatrixRectF.right, viewWidth - paddingRight)
-            bottom = Math.min(mMatrixRectF.bottom, viewHeight - paddingBottom)
+            left = max(mMatrixRectF.left, paddingLeft)
+            top = max(mMatrixRectF.top, paddingTop)
+            right = min(mMatrixRectF.right, viewWidth - paddingRight)
+            bottom = min(mMatrixRectF.bottom, viewHeight - paddingBottom)
         }
         mDisplayRect[left.toInt(), top.toInt(), right.toInt()] = bottom.toInt()
         mDisplayRectF[left.toInt().toFloat(), top.toInt().toFloat(), right.toInt().toFloat()] =
             bottom.toInt().toFloat()
     }
     private fun getViewPaddingLeft(): Int {
-        return if (mUseViewPadding) {
+        return if (!mUseViewPadding) {
             0
         } else {
             ViewUtils.getViewPaddingLeft(view)
@@ -278,7 +279,7 @@ class GraphicsDrawable(val view: View) : Drawable() {
     }
 
     private fun getViewPaddingRight(): Int {
-        return if (mUseViewPadding) {
+        return if (!mUseViewPadding) {
             0
         } else {
             ViewUtils.getViewPaddingRight(view)
@@ -287,18 +288,18 @@ class GraphicsDrawable(val view: View) : Drawable() {
 
 
     private fun getViewPaddingTop(): Int {
-        return if (mUseViewPadding) {
+        return if (!mUseViewPadding) {
             0
         } else {
-            view.getPaddingTop()
+            view.paddingTop
         }
     }
 
     private fun getViewPaddingBottom(): Int {
-        return if (mUseViewPadding) {
+        return if (!mUseViewPadding) {
             0
         } else {
-            view.getPaddingBottom()
+            view.paddingBottom
         }
     }
 
@@ -337,20 +338,16 @@ class GraphicsDrawable(val view: View) : Drawable() {
      */
     fun setBackgroundMode(backgroundMode: Boolean) {
         mBackgroundMode = backgroundMode
+        invalidateSelf()
     }
 
-    /**
-     * 设置是否跟随 ImageView 的 ScaleType 来显示图片
-     */
-    fun setFollowImageViewScaleType(followImageViewScaleType: Boolean) {
-        mFollowImageViewScaleType = followImageViewScaleType
-    }
 
     /**
-     * 设置自定义的 ScaleType 显示类型，设置此项之后您需要再次设置[setFollowImageViewScaleType]为 false ，才可生效
+     * 设置自定义的 ScaleType 显示类型，如果所设置的 View 不是ImageView 则自动生效，否则如果是 ImageView 您需要再次设置[setBackgroundMode]为 true ，才可生效
      */
     fun setScaleType(scaleType: ScaleType){
         mScaleType = scaleType
+        invalidateSelf()
     }
 
     /**
@@ -358,6 +355,7 @@ class GraphicsDrawable(val view: View) : Drawable() {
      */
     fun setShapeType(shapeType: ShapeType) {
         mShapeType = shapeType
+        invalidateSelf()
     }
 
     /**
@@ -408,6 +406,7 @@ class GraphicsDrawable(val view: View) : Drawable() {
      */
     fun setUseViewPadding(useViewPadding: Boolean) {
         mUseViewPadding = useViewPadding
+        invalidateSelf()
     }
 
 
@@ -434,7 +433,6 @@ class GraphicsDrawable(val view: View) : Drawable() {
         graphicsDrawable.setShapeType(mShapeType)
         graphicsDrawable.customDrawable = customDrawable
         graphicsDrawable.mScaleType = mScaleType
-        graphicsDrawable.mFollowImageViewScaleType = mFollowImageViewScaleType
         graphicsDrawable.mBackgroundMode = mBackgroundMode
         graphicsDrawable.mUseViewPadding = mUseViewPadding
         return graphicsDrawable

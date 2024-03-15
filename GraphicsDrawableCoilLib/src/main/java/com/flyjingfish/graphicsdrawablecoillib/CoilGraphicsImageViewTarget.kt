@@ -5,7 +5,7 @@ import android.widget.ImageView
 import coil.target.ImageViewTarget
 import com.flyjingfish.graphicsdrawablelib.GraphicsDrawable
 
-class CoilGraphicsImageViewTarget(view: ImageView, private val mGraphicsDrawable: GraphicsDrawable) : ImageViewTarget(view) {
+open class CoilGraphicsImageViewTarget(view: ImageView, private val mGraphicsDrawable: GraphicsDrawable) : ImageViewTarget(view) {
     private val mStartGraphicsDrawable: GraphicsDrawable = mGraphicsDrawable.copy()
     private val mFailedGraphicsDrawable: GraphicsDrawable = mGraphicsDrawable.copy()
 

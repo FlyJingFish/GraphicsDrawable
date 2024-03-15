@@ -5,7 +5,7 @@ import android.widget.ImageView
 import com.bumptech.glide.request.target.ImageViewTarget
 import com.flyjingfish.graphicsdrawablelib.GraphicsDrawable
 
-class GlideGraphicsImageViewTarget(private val mGraphicsDrawable: GraphicsDrawable) :
+open class GlideGraphicsImageViewTarget(private val mGraphicsDrawable: GraphicsDrawable) :
     ImageViewTarget<Drawable?>(mGraphicsDrawable.view as ImageView) {
     private val mStartGraphicsDrawable: GraphicsDrawable = mGraphicsDrawable.copy()
     private val mFailedGraphicsDrawable: GraphicsDrawable = mGraphicsDrawable.copy()

@@ -59,7 +59,6 @@ dependencies {
 | setDrawable                 |            设置绘制的图片            |
 | setCustomDrawable           |          设置自定义的显示形状           |
 | setBackgroundMode           |            设置背景模式             |
-| setFollowImageViewScaleType | 设置是否跟随ImageView的 ScaleType 显示 |
 | setScaleType                |      设置自定义 ScaleType 的类型      |
 | setShapeType                |            设置显示的形状            |
 | setRadius                   |           设置矩形图的圆角值           |
@@ -71,7 +70,6 @@ dependencies {
 val pic1Drawable = GraphicsDrawable(view)
 pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
 pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
-Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsImageViewTarget(pic1Drawable))
 
 ```
 - 四个角不同的矩形圆角图
@@ -79,14 +77,12 @@ Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsImageViewTa
 val pic2Drawable = GraphicsDrawable(view)
 pic2Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
 pic2Drawable.setRelativeRadius(MyImageLoader.dp2px(10f).toFloat(),MyImageLoader.dp2px(20f).toFloat(),MyImageLoader.dp2px(30f).toFloat(),MyImageLoader.dp2px(40f).toFloat())
-Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsImageViewTarget(pic2Drawable))
 
 ```
 - 圆形图
 ```kotlin
 val pic3Drawable = GraphicsDrawable(view)
 pic3Drawable.setShapeType(GraphicsDrawable.ShapeType.OVAL)
-Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsImageViewTarget(pic3Drawable))
 
 ```
 - 自定义图形
@@ -94,7 +90,6 @@ Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsImageViewTa
 val pic4Drawable = GraphicsDrawable(view)
 pic4Drawable.setShapeType(GraphicsDrawable.ShapeType.CUSTOM)
 pic4Drawable.setCustomDrawable(resources.getDrawable(R.drawable.ic_vector_flower))
-Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsImageViewTarget(pic4Drawable))
 
 ```
 ### 二、Glide 使用
@@ -117,6 +112,10 @@ Glide
 - View 设置 背景
 
 ```kotlin
+val pic1Drawable = GraphicsDrawable(view)
+pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
+pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
+
 Glide
     .with(view)
     .load(url)
@@ -149,6 +148,10 @@ imageLoader.enqueue(request)
 - View 设置 背景
 
 ```kotlin
+val pic1Drawable = GraphicsDrawable(view)
+pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
+pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
+
 val imageLoader = Coil.imageLoader(context)
 val request = ImageRequest.Builder(context)
     .data(url)

@@ -5,12 +5,11 @@ import android.widget.ImageView
 import coil.target.ImageViewTarget
 import com.flyjingfish.graphicsdrawablelib.GraphicsDrawable
 
-class CoilGraphicsViewBackgroundTarget(view: ImageView, private val graphicsDrawable: GraphicsDrawable) : ViewBackgroundTarget(view) {
+open class CoilGraphicsViewBackgroundTarget(view: ImageView, private val graphicsDrawable: GraphicsDrawable) : ViewBackgroundTarget(view) {
     private val mGraphicsDrawable: GraphicsDrawable
     private val mStartGraphicsDrawable: GraphicsDrawable
     private val mFailedGraphicsDrawable: GraphicsDrawable
     init {
-        graphicsDrawable.setFollowImageViewScaleType(false)
         graphicsDrawable.setBackgroundMode(true)
         mGraphicsDrawable = graphicsDrawable
         mStartGraphicsDrawable = graphicsDrawable.copy()
