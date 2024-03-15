@@ -103,11 +103,11 @@ Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsImageViewTa
 
 
 ```kotlin
-val pic1Drawable = GraphicsDrawable(binding.iv1)
+val pic1Drawable = GraphicsDrawable(view)
 pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
 pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
 Glide
-    .with(iv)
+    .with(view)
     .load(url)
     .placeholder(R.drawable.placeholder)
     .error(R.drawable.error)
@@ -118,7 +118,7 @@ Glide
 
 ```kotlin
 Glide
-    .with(iv)
+    .with(view)
     .load(url)
     .placeholder(R.drawable.placeholder)
     .error(R.drawable.error)
@@ -130,16 +130,16 @@ Glide
 - ImageView 的使用，以下例子默认跟随 ImageView 的 ScaleType 显示
 
 ```kotlin
-val pic1Drawable = GraphicsDrawable(binding.iv1)
+val pic1Drawable = GraphicsDrawable(view)
 pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
 pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
 
-val imageLoader = Coil.imageLoader(iv.context)
-val request = ImageRequest.Builder(iv.context)
+val imageLoader = Coil.imageLoader(context)
+val request = ImageRequest.Builder(context)
     .data(url)
     .placeholder(R.drawable.placeholder)
     .error(R.drawable.error)
-    .target(CoilGraphicsImageViewTarget(iv, pic1Drawable))
+    .target(CoilGraphicsImageViewTarget(view, pic1Drawable))
     .build()
     
 imageLoader.enqueue(request)
@@ -149,12 +149,12 @@ imageLoader.enqueue(request)
 - View 设置 背景
 
 ```kotlin
-val imageLoader = Coil.imageLoader(iv.context)
-val request = ImageRequest.Builder(iv.context)
+val imageLoader = Coil.imageLoader(context)
+val request = ImageRequest.Builder(context)
     .data(url)
     .placeholder(R.drawable.placeholder)
     .error(R.drawable.error)
-    .target(CoilGraphicsViewBackgroundTarget(iv, pic4Drawable))
+    .target(CoilGraphicsViewBackgroundTarget(view, pic4Drawable))
     .build()
 imageLoader.enqueue(request)
 
