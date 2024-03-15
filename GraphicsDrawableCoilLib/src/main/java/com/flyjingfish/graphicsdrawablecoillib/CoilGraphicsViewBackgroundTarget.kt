@@ -1,14 +1,14 @@
-package com.flyjingfish.graphicsdrawableglidelib
+package com.flyjingfish.graphicsdrawablecoillib
 
 import android.graphics.drawable.Drawable
+import android.widget.ImageView
+import coil.target.ImageViewTarget
 import com.flyjingfish.graphicsdrawablelib.GraphicsDrawable
 
-class GraphicsDrawableViewBackgroundTarget(graphicsDrawable: GraphicsDrawable) :
-    BaseViewTarget<Drawable?>(graphicsDrawable.view) {
+class CoilGraphicsViewBackgroundTarget(view: ImageView, private val graphicsDrawable: GraphicsDrawable) : ViewBackgroundTarget(view) {
     private val mGraphicsDrawable: GraphicsDrawable
     private val mStartGraphicsDrawable: GraphicsDrawable
     private val mFailedGraphicsDrawable: GraphicsDrawable
-
     init {
         graphicsDrawable.setFollowImageViewScaleType(false)
         graphicsDrawable.setBackgroundMode(true)
@@ -16,19 +16,18 @@ class GraphicsDrawableViewBackgroundTarget(graphicsDrawable: GraphicsDrawable) :
         mStartGraphicsDrawable = graphicsDrawable.copy()
         mFailedGraphicsDrawable = graphicsDrawable.copy()
     }
-
-    override fun onLoadStarted(placeholder: Drawable?) {
+    override fun onStart(placeholder: Drawable?) {
         mStartGraphicsDrawable.setDrawable(placeholder)
-        super.onLoadStarted(mStartGraphicsDrawable)
+        super.onStart(mStartGraphicsDrawable)
     }
 
-    override fun onLoadFailed(errorDrawable: Drawable?) {
-        mFailedGraphicsDrawable.setDrawable(errorDrawable)
-        super.onLoadFailed(mFailedGraphicsDrawable)
+    override fun onError(error: Drawable?) {
+        mFailedGraphicsDrawable.setDrawable(error)
+        super.onError(mFailedGraphicsDrawable)
     }
 
-    override fun setResource(resource: Drawable?) {
-        mGraphicsDrawable.setDrawable(resource)
-        view.background = mGraphicsDrawable
+    override fun onSuccess(result: Drawable) {
+        mGraphicsDrawable.setDrawable(result)
+        super.onSuccess(mGraphicsDrawable)
     }
 }

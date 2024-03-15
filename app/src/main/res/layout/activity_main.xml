@@ -7,12 +7,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
-
+        <RadioGroup
+            android:id="@+id/rg_load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/rb_glide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Glide"/>
+            <RadioButton
+                android:id="@+id/rb_coil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Coil"/>
+        </RadioGroup>
+        <CheckBox
+            android:id="@+id/cb_use"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:checked="true"
+            android:text="使用GraphicsDrawable"/>
+        <CheckBox
+            android:id="@+id/cb_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="设置为背景"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <TextView
@@ -42,10 +72,19 @@
                 android:gravity="center"
                 android:onClick="onPicClick"
                 android:text="竖超长图" />
+
+            <TextView
+                android:id="@+id/tv_pic4"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="onPicClick"
+                android:text="加载错误" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
@@ -53,7 +92,6 @@
             <TextView
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
                 android:gravity="center_horizontal"
                 android:text="四个角相同" />
 
@@ -64,107 +102,156 @@
                 android:gravity="center_horizontal"
                 android:text="不同的四个角" />
 
-            <TextView
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:gravity="center_horizontal"
-                android:text="圆形" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/iv_center"
+                android:id="@+id/iv_1"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:layout_marginStart="5dp"
+                android:padding="10dp"
                 android:background="@color/purple_700"
                 android:scaleType="centerCrop" />
 
             <ImageView
-                android:id="@+id/iv_centerCrop"
+                android:id="@+id/iv_2"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
+                android:padding="10dp"
                 android:layout_marginStart="10dp"
                 android:src="@mipmap/ic_launcher"
                 android:background="@color/purple_700"
                 android:scaleType="centerCrop" />
 
-            <ImageView
-                android:id="@+id/iv_centerInside"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:layout_marginStart="10dp"
-                android:padding="10dp"
-                android:background="@color/purple_700"
-                android:scaleType="centerCrop" />
         </LinearLayout>
-
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:gravity="center_horizontal"
-                android:text="边框四个角相同" />
 
             <TextView
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:gravity="center_horizontal"
-                android:text="边框不同的四个角" />
-
+                android:text="圆形" />
             <TextView
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:gravity="center_horizontal"
-                android:text="边框圆形" />
+                android:text="自定义图形" />
         </LinearLayout>
-
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/iv_fitStart"
+                android:id="@+id/iv_3"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:layout_marginStart="5dp"
-                android:padding="2dp"
+                android:padding="10dp"
                 android:background="@color/purple_700"
                 android:scaleType="centerCrop" />
 
             <ImageView
-                android:id="@+id/iv_fitCenter"
+                android:id="@+id/iv_4"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:layout_marginStart="10dp"
                 android:padding="10dp"
-                android:background="@color/purple_700"
-                android:scaleType="centerCrop"  />
-
-            <ImageView
-                android:id="@+id/iv_fitEnd"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:layout_marginStart="10dp"
-                android:padding="5dp"
-                android:background="@color/purple_700"
                 android:src="@mipmap/ic_launcher"
+                android:background="@color/purple_700"
                 android:scaleType="centerCrop" />
         </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:flow_wrapMode="chain"
+                app:flow_verticalGap="10dp"
+                app:flow_horizontalGap="10dp"
+                app:constraint_referenced_ids="tv_centerCrop,
+                    tv_center, tv_centerInside,
+                    tv_fixXY,tv_fitStart,tv_fitCenter,
+                    tv_fitEnd"
+                />
+            <RadioButton
+                android:id="@+id/tv_centerCrop"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:paddingHorizontal="10dp"
+                android:gravity="center"
+                android:checked="true"
+                android:onClick="onScaleTypeClick"
+                android:text="centerCrop" />
+            <RadioButton
+                android:id="@+id/tv_center"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:paddingHorizontal="10dp"
+                android:gravity="center"
+                android:onClick="onScaleTypeClick"
+                android:text="center" />
+            <RadioButton
+                android:id="@+id/tv_centerInside"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:paddingHorizontal="10dp"
+                android:gravity="center"
+                android:onClick="onScaleTypeClick"
+                android:text="centerInside" />
+            <RadioButton
+                android:id="@+id/tv_fixXY"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:paddingHorizontal="10dp"
+                android:gravity="center"
+                android:onClick="onScaleTypeClick"
+                android:text="fixXY" />
+            <RadioButton
+                android:id="@+id/tv_fitStart"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:paddingHorizontal="10dp"
+                android:gravity="center"
+                android:onClick="onScaleTypeClick"
+                android:text="fitStart" />
+            <RadioButton
+                android:id="@+id/tv_fitCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:paddingHorizontal="10dp"
+                android:gravity="center"
+                android:onClick="onScaleTypeClick"
+                android:text="tv_fitCenter" />
+            <RadioButton
+                android:id="@+id/tv_fitEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:paddingHorizontal="10dp"
+                android:gravity="center"
+                android:onClick="onScaleTypeClick"
+                android:text="tv_fitEnd" />
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>

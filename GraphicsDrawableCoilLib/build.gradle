@@ -1,0 +1,22 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+apply from: "$rootDir/gradle/android_base.gradle"
+apply from: "$rootDir/gradle/android_publish.gradle"
+android {
+    namespace 'com.flyjingfish.graphicsdrawablecoillib'
+    buildTypes {
+        release {
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+        debug {
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compileOnly "io.coil-kt:coil:2.4.0"
+    compileOnly project(path: ':GraphicsDrawable')
+}

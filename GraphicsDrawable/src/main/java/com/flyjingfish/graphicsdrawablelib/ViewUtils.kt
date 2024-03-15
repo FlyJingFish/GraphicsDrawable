@@ -7,7 +7,7 @@ import java.util.Locale
 
 internal object ViewUtils {
     fun getViewPaddingLeft(view: View): Int {
-        var isRtl: Boolean = TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == LayoutDirection.RTL
+        val isRtl: Boolean = TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == LayoutDirection.RTL
         val paddingStart = view.paddingStart
         val paddingEnd = view.paddingEnd
         val paddingLeft = view.paddingLeft
@@ -28,7 +28,7 @@ internal object ViewUtils {
     }
 
     fun getViewPaddingRight(view: View): Int {
-        var isRtl: Boolean = TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == LayoutDirection.RTL
+        val isRtl: Boolean = TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == LayoutDirection.RTL
         val paddingStart = view.paddingStart
         val paddingEnd = view.paddingEnd
         val paddingRight = view.paddingRight

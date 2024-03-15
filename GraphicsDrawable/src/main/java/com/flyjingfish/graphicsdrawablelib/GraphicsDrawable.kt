@@ -287,6 +287,7 @@ class GraphicsDrawable(val view: View) : Drawable() {
 
     fun setDrawable(drawable: Drawable?) {
         this.drawable = drawable
+        invalidateSelf()
     }
 
     fun setBackgroundMode(backgroundMode: Boolean) {
