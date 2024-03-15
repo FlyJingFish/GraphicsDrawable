@@ -21,10 +21,8 @@
             android:name="design_height_in_dp"
             android:value="640" />
 
-        <activity android:name="com.flyjingfish.graphicsdrawable.MainActivity">
-
-        </activity>
-        <activity android:name="com.flyjingfish.graphicsdrawable.ScaleTypeActivity">
+        <activity android:name="com.flyjingfish.graphicsdrawable.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

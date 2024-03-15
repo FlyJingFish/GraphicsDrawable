@@ -37,7 +37,7 @@ allprojects {
 
 ```gradle
 dependencies {
-    implementation 'com.github.FlyJingFish:GraphicsDrawable:1.0.0'
+    implementation 'io.github.FlyJingFish:GraphicsDrawable:1.0.0'
 }
 ```
 ## 第三步，使用说明

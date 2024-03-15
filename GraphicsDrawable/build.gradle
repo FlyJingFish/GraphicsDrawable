@@ -1,11 +1,18 @@
-apply plugin: 'com.android.library'
-apply from: "$rootDir/gradle/publish.gradle"
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+apply from: "$rootDir/gradle/android_base.gradle"
+apply from: "$rootDir/gradle/android_publish.gradle"
 android {
-    compileSdkVersion rootProject.ext.sdkVersion
-
-    defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.sdkVersion
+    namespace 'com.flyjingfish.graphicsdrawablelib'
+    buildTypes {
+        release {
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+        debug {
+            consumerProguardFiles 'proguard-rules.pro'
+        }
     }
 }
 

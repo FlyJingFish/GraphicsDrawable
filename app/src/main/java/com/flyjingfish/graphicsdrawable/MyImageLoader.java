@@ -18,7 +18,6 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.flyjingfish.graphicsdrawableglidelib.GraphicsDrawableImageViewTarget;
-import com.flyjingfish.graphicsdrawableglidelib.GraphicsDrawableViewBackgroundTarget;
 import com.flyjingfish.graphicsdrawablelib.GraphicsDrawable;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
@@ -45,16 +44,6 @@ public class MyImageLoader {
             return;
         into(url, iv, 0, 0, p, err, false, -1, false);
     }
-    public void load(ImageView iv, String url, int w, int h, @DrawableRes int p, @DrawableRes int err) {
-        if (!ActivityCompatHelper.assertValidRequest(iv.getContext()))
-            return;
-        into(url, iv, w, h, p, err, false, -1, false,null);
-    }
-    public void load(ImageView iv, String url, int w, int h, @DrawableRes int p, @DrawableRes int err,OnImageLoadListener requestListener) {
-        if (!ActivityCompatHelper.assertValidRequest(iv.getContext()))
-            return;
-        into(url, iv, w, h, p, err, false, -1, false,requestListener);
-    }
 
     public void loadRoundCorner(ImageView iv, String url, float radiusDp, @DrawableRes int p, @DrawableRes int err) {
         if (!ActivityCompatHelper.assertValidRequest(iv.getContext()))
@@ -62,11 +51,6 @@ public class MyImageLoader {
         into(url, iv, 0, 0, p, err, false, radiusDp, false);
     }
 
-    public void loadRoundCorner(ImageView iv, String url, float radiusDp, int w, int h, @DrawableRes int p, @DrawableRes int err,OnImageLoadListener requestListener) {
-        if (!ActivityCompatHelper.assertValidRequest(iv.getContext()))
-            return;
-        into(url, iv, w, h, p, err, false, radiusDp, false,requestListener);
-    }
     public void loadCircle(ImageView iv, String url,  @DrawableRes int p, @DrawableRes int err) {
         if (!ActivityCompatHelper.assertValidRequest(iv.getContext()))
             return;
@@ -141,6 +125,6 @@ public class MyImageLoader {
 
 
     public static int dp2px(float dp){
-        return (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,dp,MyApplication.mInstance.getResources().getDisplayMetrics()) + 0.5f);
+        return (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,dp,MyApplication.Companion.getMInstance().getResources().getDisplayMetrics()) + 0.5f);
     }
 }
