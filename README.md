@@ -105,7 +105,7 @@ Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsViewBackgro
 ### 三、Coil 使用
 
 - ImageView 的使用，以下例子默认跟随 ImageView 的 ScaleType 显示
-- 
+
 ```kotlin
 // 四个角一样
 val pic1Drawable = GraphicsDrawable(binding.iv1)
