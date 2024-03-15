@@ -9,7 +9,7 @@
 
 
 ## GraphicsDrawable支持圆图、圆角图以及自定义图形；不再需要学习各个图片加载框架各种设置圆角，圆形图，甚至任何的特殊图形也无缝支持；不需要再让 UI 切各种圆角、圆形图或其他图形的 placeholder、error 资源图
-
+## 最重要的是不挑显示控件
 <img src="https://github.com/FlyJingFish/GraphicsDrawable/blob/master/screenshot/Screenshot_20240315_171632.jpg" width="400px" height="800px" alt="show" />
 
 
@@ -24,7 +24,7 @@
 
 4、**GraphicsDrawable** 完美兼容所有的图片加载库，支持定义任意图形，只有你想不到没有它做不到
 
-5、**GraphicsDrawable** 不挑显示控件，任何View都可以，只要支持 Drawable 就可以
+5、**GraphicsDrawable 不挑显示控件，任何View都可以，只要支持 Drawable 就可以**
 
 
 
