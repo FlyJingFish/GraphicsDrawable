@@ -32,6 +32,7 @@ public class GraphicsDrawable extends Drawable {
     private final View mView;
     private Drawable mDrawable;
     private Drawable mCustomDrawable;
+    private final RectF mDrawRectF = new RectF();
     private final RectF mMatrixRectF = new RectF();
     private final Rect mMatrixRect = new Rect();
     private final Rect mDisplayRect = new Rect();
@@ -52,6 +53,9 @@ public class GraphicsDrawable extends Drawable {
     private ImageView.ScaleType mScaleType;
 
     private boolean mUseViewPadding = true;
+    private final RectF mTempSrc = new RectF();
+    private final RectF mTempDst = new RectF();
+
     public GraphicsDrawable(View view) {
         this.mView = view;
         isRtl = TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == LayoutDirection.RTL;
@@ -92,19 +96,19 @@ public class GraphicsDrawable extends Drawable {
 
             mDrawPath.addRoundRect(mDisplayRectF, radius, Path.Direction.CCW);
         }
-
+        mDrawRectF.set(0,0,mView.getWidth(),mView.getHeight());
         if (mShapeType == ShapeType.OVAL || mShapeType == ShapeType.RECTANGLE) {
-            canvas.saveLayer(new RectF(0,0,canvas.getWidth(),canvas.getHeight()), mImagePaint, Canvas.ALL_SAVE_FLAG);
+            canvas.saveLayer(mDrawRectF, mImagePaint, Canvas.ALL_SAVE_FLAG);
             canvas.drawPath(mDrawPath, mImagePaint);
             mImagePaint.setXfermode(SRC_IN);
-            canvas.saveLayer(new RectF(0,0,canvas.getWidth(),canvas.getHeight()), mImagePaint, Canvas.ALL_SAVE_FLAG);
+            canvas.saveLayer(mDrawRectF, mImagePaint, Canvas.ALL_SAVE_FLAG);
             mImagePaint.setXfermode(null);
         } else if (mShapeType == ShapeType.CUSTOM){
-            canvas.saveLayer(new RectF(0,0,canvas.getWidth(),canvas.getHeight()), mImagePaint, Canvas.ALL_SAVE_FLAG);
+            canvas.saveLayer(mDrawRectF, mImagePaint, Canvas.ALL_SAVE_FLAG);
             mCustomDrawable.setBounds(mDisplayRect);
             mCustomDrawable.draw(canvas);
             mImagePaint.setXfermode(SRC_IN);
-            canvas.saveLayer(new RectF(0,0,canvas.getWidth(),canvas.getHeight()), mImagePaint, Canvas.ALL_SAVE_FLAG);
+            canvas.saveLayer(mDrawRectF, mImagePaint, Canvas.ALL_SAVE_FLAG);
             mImagePaint.setXfermode(null);
         }
         mDrawable.setBounds(mMatrixRect);
@@ -177,8 +181,8 @@ public class GraphicsDrawable extends Drawable {
                     (viewHeight - drawableHeight * scale) / 2F);
 
         } else {
-            RectF mTempSrc = new RectF(0, 0, drawableWidth, drawableHeight);
-            RectF mTempDst = new RectF(0, 0, viewWidth, viewHeight);
+            mTempSrc.set(0, 0, drawableWidth, drawableHeight);
+            mTempDst.set(0, 0, viewWidth, viewHeight);
             switch (scaleType) {
                 case FIT_CENTER:
                     mDrawableMatrix.setRectToRect(mTempSrc, mTempDst, Matrix.ScaleToFit.CENTER);
