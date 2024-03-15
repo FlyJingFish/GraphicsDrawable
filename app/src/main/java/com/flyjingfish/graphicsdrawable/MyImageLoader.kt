@@ -5,22 +5,15 @@ import android.util.TypedValue
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import coil.Coil
-import coil.request.ErrorResult
 import coil.request.ImageRequest
-import coil.request.SuccessResult
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target
 import com.flyjingfish.graphicsdrawablecoillib.CoilGraphicsImageViewTarget
 import com.flyjingfish.graphicsdrawablecoillib.CoilGraphicsViewBackgroundTarget
 import com.flyjingfish.graphicsdrawableglidelib.GlideGraphicsImageViewTarget
 import com.flyjingfish.graphicsdrawableglidelib.GlideGraphicsViewBackgroundTarget
 import com.flyjingfish.graphicsdrawablelib.GraphicsDrawable
-import jp.wasabeef.glide.transformations.BlurTransformation
 
 object MyImageLoader {
     var loadType: LoaderType = LoaderType.GLIDE
@@ -61,9 +54,9 @@ object MyImageLoader {
 
         if (useDrawable) {
             if (backgroundMode){
-                requestBuilder.target(CoilGraphicsViewBackgroundTarget(iv, graphicsDrawable))
+                requestBuilder.target(CoilGraphicsViewBackgroundTarget(graphicsDrawable))
             }else{
-                requestBuilder.target(CoilGraphicsImageViewTarget(iv, graphicsDrawable))
+                requestBuilder.target(CoilGraphicsImageViewTarget(graphicsDrawable))
             }
         } else {
             requestBuilder.target(iv)

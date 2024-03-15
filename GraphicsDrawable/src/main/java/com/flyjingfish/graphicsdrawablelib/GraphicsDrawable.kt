@@ -181,54 +181,59 @@ open class GraphicsDrawable(val view: View) : Drawable() {
         mDrawableMatrix.reset()
         val widthScale = viewWidth / drawableWidth
         val heightScale = viewHeight / drawableHeight
-        if (scaleType == ScaleType.CENTER) {
-            mDrawableMatrix.postTranslate(
-                (viewWidth - drawableWidth) / 2f,
-                (viewHeight - drawableHeight) / 2f
-            )
-        } else if (scaleType == ScaleType.CENTER_CROP) {
-            val scale = Math.max(widthScale, heightScale)
-            mDrawableMatrix.postScale(scale, scale)
-            mDrawableMatrix.postTranslate(
-                (viewWidth - drawableWidth * scale) / 2f,
-                (viewHeight - drawableHeight * scale) / 2f
-            )
-        } else if (scaleType == ScaleType.CENTER_INSIDE) {
-            val scale = Math.min(1.0f, Math.min(widthScale, heightScale))
-            mDrawableMatrix.postScale(scale, scale)
-            mDrawableMatrix.postTranslate(
-                (viewWidth - drawableWidth * scale) / 2f,
-                (viewHeight - drawableHeight * scale) / 2f
-            )
-        } else {
-            mTempSrc[0f, 0f, drawableWidth.toFloat()] = drawableHeight.toFloat()
-            mTempDst[0f, 0f, viewWidth] = viewHeight
-            when (scaleType) {
-                ScaleType.FIT_CENTER -> mDrawableMatrix.setRectToRect(
-                    mTempSrc,
-                    mTempDst,
-                    Matrix.ScaleToFit.CENTER
+        when (scaleType) {
+            ScaleType.CENTER -> {
+                mDrawableMatrix.postTranslate(
+                    (viewWidth - drawableWidth) / 2f,
+                    (viewHeight - drawableHeight) / 2f
                 )
-
-                ScaleType.FIT_START -> mDrawableMatrix.setRectToRect(
-                    mTempSrc,
-                    mTempDst,
-                    Matrix.ScaleToFit.START
+            }
+            ScaleType.CENTER_CROP -> {
+                val scale = max(widthScale, heightScale)
+                mDrawableMatrix.postScale(scale, scale)
+                mDrawableMatrix.postTranslate(
+                    (viewWidth - drawableWidth * scale) / 2f,
+                    (viewHeight - drawableHeight * scale) / 2f
                 )
-
-                ScaleType.FIT_END -> mDrawableMatrix.setRectToRect(
-                    mTempSrc,
-                    mTempDst,
-                    Matrix.ScaleToFit.END
+            }
+            ScaleType.CENTER_INSIDE -> {
+                val scale = min(1.0f, min(widthScale, heightScale))
+                mDrawableMatrix.postScale(scale, scale)
+                mDrawableMatrix.postTranslate(
+                    (viewWidth - drawableWidth * scale) / 2f,
+                    (viewHeight - drawableHeight * scale) / 2f
                 )
+            }
+            else -> {
+                mTempSrc[0f, 0f, drawableWidth.toFloat()] = drawableHeight.toFloat()
+                mTempDst[0f, 0f, viewWidth] = viewHeight
+                when (scaleType) {
+                    ScaleType.FIT_CENTER -> mDrawableMatrix.setRectToRect(
+                        mTempSrc,
+                        mTempDst,
+                        Matrix.ScaleToFit.CENTER
+                    )
 
-                ScaleType.FIT_XY -> mDrawableMatrix.setRectToRect(
-                    mTempSrc,
-                    mTempDst,
-                    Matrix.ScaleToFit.FILL
-                )
+                    ScaleType.FIT_START -> mDrawableMatrix.setRectToRect(
+                        mTempSrc,
+                        mTempDst,
+                        Matrix.ScaleToFit.START
+                    )
 
-                else -> {}
+                    ScaleType.FIT_END -> mDrawableMatrix.setRectToRect(
+                        mTempSrc,
+                        mTempDst,
+                        Matrix.ScaleToFit.END
+                    )
+
+                    ScaleType.FIT_XY -> mDrawableMatrix.setRectToRect(
+                        mTempSrc,
+                        mTempDst,
+                        Matrix.ScaleToFit.FILL
+                    )
+
+                    else -> {}
+                }
             }
         }
         getDrawableRect()
@@ -252,10 +257,10 @@ open class GraphicsDrawable(val view: View) : Drawable() {
         val right: Float
         val bottom: Float
         if (mBackgroundMode) {
-            left = mMatrixRectF.left
-            top = mMatrixRectF.top
-            right = mMatrixRectF.right
-            bottom = mMatrixRectF.bottom
+            left = max(mMatrixRectF.left,0f)
+            top = max(mMatrixRectF.top,0f)
+            right = min(mMatrixRectF.right,viewWidth)
+            bottom = min(mMatrixRectF.bottom,viewHeight)
         } else {
             val paddingLeft = getViewPaddingLeft().toFloat()
             val paddingTop = getViewPaddingTop().toFloat()

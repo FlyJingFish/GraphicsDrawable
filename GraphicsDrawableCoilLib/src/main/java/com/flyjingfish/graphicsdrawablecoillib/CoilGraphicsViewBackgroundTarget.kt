@@ -1,11 +1,9 @@
 package com.flyjingfish.graphicsdrawablecoillib
 
 import android.graphics.drawable.Drawable
-import android.widget.ImageView
-import coil.target.ImageViewTarget
 import com.flyjingfish.graphicsdrawablelib.GraphicsDrawable
 
-open class CoilGraphicsViewBackgroundTarget(view: ImageView, private val graphicsDrawable: GraphicsDrawable) : ViewBackgroundTarget(view) {
+open class CoilGraphicsViewBackgroundTarget(graphicsDrawable: GraphicsDrawable) : ViewBackgroundTarget(graphicsDrawable.view) {
     private val mGraphicsDrawable: GraphicsDrawable
     private val mStartGraphicsDrawable: GraphicsDrawable
     private val mFailedGraphicsDrawable: GraphicsDrawable

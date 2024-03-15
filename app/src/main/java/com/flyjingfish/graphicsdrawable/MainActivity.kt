@@ -22,11 +22,28 @@ import com.flyjingfish.graphicsdrawablelib.GraphicsDrawable
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var itemData: String
+    private lateinit var pic1Drawable : GraphicsDrawable
+    private lateinit var pic2Drawable : GraphicsDrawable
+    private lateinit var pic3Drawable : GraphicsDrawable
+    private lateinit var pic4Drawable : GraphicsDrawable
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        pic1Drawable = GraphicsDrawable(binding.iv1)
+        pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
+        pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
 
+        pic2Drawable = GraphicsDrawable(binding.iv2)
+        pic2Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
+        pic2Drawable.setRelativeRadius(MyImageLoader.dp2px(10f).toFloat(),MyImageLoader.dp2px(20f).toFloat(),MyImageLoader.dp2px(30f).toFloat(),MyImageLoader.dp2px(40f).toFloat())
+
+        pic3Drawable = GraphicsDrawable(binding.iv3)
+        pic3Drawable.setShapeType(GraphicsDrawable.ShapeType.OVAL)
+
+        pic4Drawable = GraphicsDrawable(binding.iv4)
+        pic4Drawable.setShapeType(GraphicsDrawable.ShapeType.CUSTOM)
+        pic4Drawable.setCustomDrawable(resources.getDrawable(R.drawable.ic_vector_flower))
         binding.rgLoad.setOnCheckedChangeListener { _, checkedId ->
             if (checkedId == R.id.rb_glide) {
                 MyImageLoader.loadType = MyImageLoader.LoaderType.GLIDE
@@ -74,20 +91,7 @@ class MainActivity : AppCompatActivity() {
                 binding.iv4.setImageDrawable(null)
             }
 
-            val pic1Drawable = GraphicsDrawable(binding.iv1)
-            pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
-            pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
 
-            val pic2Drawable = GraphicsDrawable(binding.iv2)
-            pic2Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
-            pic2Drawable.setRelativeRadius(MyImageLoader.dp2px(10f).toFloat(),MyImageLoader.dp2px(20f).toFloat(),MyImageLoader.dp2px(30f).toFloat(),MyImageLoader.dp2px(40f).toFloat())
-
-            val pic3Drawable = GraphicsDrawable(binding.iv3)
-            pic3Drawable.setShapeType(GraphicsDrawable.ShapeType.OVAL)
-
-            val pic4Drawable = GraphicsDrawable(binding.iv4)
-            pic4Drawable.setShapeType(GraphicsDrawable.ShapeType.CUSTOM)
-            pic4Drawable.setCustomDrawable(resources.getDrawable(R.drawable.ic_vector_flower))
 
 //            val uri = Uri.parse(
 //                ContentResolver.SCHEME_ANDROID_RESOURCE
@@ -175,6 +179,8 @@ class MainActivity : AppCompatActivity() {
         (view as RadioButton).isChecked = true
     }
 
+    private var mScaleType: ScaleType ?= null
+
     private fun  setScaleType(scaleType: ScaleType){
         binding.iv1.scaleType = scaleType
         binding.iv2.scaleType = scaleType
@@ -187,7 +193,13 @@ class MainActivity : AppCompatActivity() {
         binding.tvFitStart.isChecked = false
         binding.tvFitEnd.isChecked = false
         binding.tvFixXY.isChecked = false
-
+        mScaleType = scaleType
+        if (MyImageLoader.backgroundMode){
+            pic1Drawable.setScaleType(scaleType)
+            pic2Drawable.setScaleType(scaleType)
+            pic3Drawable.setScaleType(scaleType)
+            pic4Drawable.setScaleType(scaleType)
+        }
         setData()
     }
 }
