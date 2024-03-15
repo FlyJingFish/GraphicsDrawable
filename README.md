@@ -66,40 +66,63 @@ dependencies {
 | setRelativeRadius           |       设置矩形图的圆角值(适配 Rtl)       |
 | setUseViewPadding           |      设置是否适应View的padding       |
 
+- 四个角相等的矩形圆角图
+```kotlin
+val pic1Drawable = GraphicsDrawable(view)
+pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
+pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
+Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsImageViewTarget(pic1Drawable))
+
+```
+- 四个角不同的矩形圆角图
+```kotlin
+val pic2Drawable = GraphicsDrawable(view)
+pic2Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
+pic2Drawable.setRelativeRadius(MyImageLoader.dp2px(10f).toFloat(),MyImageLoader.dp2px(20f).toFloat(),MyImageLoader.dp2px(30f).toFloat(),MyImageLoader.dp2px(40f).toFloat())
+Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsImageViewTarget(pic2Drawable))
+
+```
+- 圆形图
+```kotlin
+val pic3Drawable = GraphicsDrawable(view)
+pic3Drawable.setShapeType(GraphicsDrawable.ShapeType.OVAL)
+Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsImageViewTarget(pic3Drawable))
+
+```
+- 自定义图形
+```kotlin
+val pic4Drawable = GraphicsDrawable(view)
+pic4Drawable.setShapeType(GraphicsDrawable.ShapeType.CUSTOM)
+pic4Drawable.setCustomDrawable(resources.getDrawable(R.drawable.ic_vector_flower))
+Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsImageViewTarget(pic4Drawable))
+
+```
 ### 二、Glide 使用
 
 - ImageView 的使用，以下例子默认跟随 ImageView 的 ScaleType 显示
 
 
 ```kotlin
-// 四个角一样
 val pic1Drawable = GraphicsDrawable(binding.iv1)
 pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
 pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
-Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsImageViewTarget(pic1Drawable))
-
-// 四个角不同
-val pic2Drawable = GraphicsDrawable(binding.iv2)
-pic2Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
-pic2Drawable.setRelativeRadius(MyImageLoader.dp2px(10f).toFloat(),MyImageLoader.dp2px(20f).toFloat(),MyImageLoader.dp2px(30f).toFloat(),MyImageLoader.dp2px(40f).toFloat())
-Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsImageViewTarget(pic2Drawable))
-
-// 圆形图
-val pic3Drawable = GraphicsDrawable(binding.iv3)
-pic3Drawable.setShapeType(GraphicsDrawable.ShapeType.OVAL)
-Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsImageViewTarget(pic3Drawable))
-
-// 自定义图形
-val pic4Drawable = GraphicsDrawable(binding.iv4)
-pic4Drawable.setShapeType(GraphicsDrawable.ShapeType.CUSTOM)
-pic4Drawable.setCustomDrawable(resources.getDrawable(R.drawable.ic_vector_flower))
-Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsImageViewTarget(pic4Drawable))
+Glide
+    .with(iv)
+    .load(url)
+    .placeholder(p)
+    .error(err)
+    .into(GlideGraphicsImageViewTarget(pic1Drawable))
 
 ```
 - View 设置 背景
 
 ```kotlin
-Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsViewBackgroundTarget(pic4Drawable))
+Glide
+    .with(iv)
+    .load(url)
+    .placeholder(p)
+    .error(err)
+    .into(GlideGraphicsViewBackgroundTarget(pic1Drawable))
 ```
 
 ### 三、Coil 使用
@@ -107,35 +130,18 @@ Glide.with(iv).load(url).placeholder(p).error(err).into(GlideGraphicsViewBackgro
 - ImageView 的使用，以下例子默认跟随 ImageView 的 ScaleType 显示
 
 ```kotlin
-// 四个角一样
 val pic1Drawable = GraphicsDrawable(binding.iv1)
 pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
 pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
-val request = ImageRequest.Builder(iv.context)
-    .data(url).placeholder(p).error(err).target(CoilGraphicsImageViewTarget(iv, pic1Drawable)).build()
-imageLoader.enqueue(request)
 
-// 四个角不同
-val pic2Drawable = GraphicsDrawable(binding.iv2)
-pic2Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
-pic2Drawable.setRelativeRadius(MyImageLoader.dp2px(10f).toFloat(),MyImageLoader.dp2px(20f).toFloat(),MyImageLoader.dp2px(30f).toFloat(),MyImageLoader.dp2px(40f).toFloat())
+val imageLoader = Coil.imageLoader(iv.context)
 val request = ImageRequest.Builder(iv.context)
-    .data(url).placeholder(p).error(err).target(CoilGraphicsImageViewTarget(iv, pic2Drawable)).build()
-imageLoader.enqueue(request)
-
-// 圆形图
-val pic3Drawable = GraphicsDrawable(binding.iv3)
-pic3Drawable.setShapeType(GraphicsDrawable.ShapeType.OVAL)
-val request = ImageRequest.Builder(iv.context)
-    .data(url).placeholder(p).error(err).target(CoilGraphicsImageViewTarget(iv, pic3Drawable)).build()
-imageLoader.enqueue(request)
-
-// 自定义图形
-val pic4Drawable = GraphicsDrawable(binding.iv4)
-pic4Drawable.setShapeType(GraphicsDrawable.ShapeType.CUSTOM)
-pic4Drawable.setCustomDrawable(resources.getDrawable(R.drawable.ic_vector_flower))
-val request = ImageRequest.Builder(iv.context)
-    .data(url).placeholder(p).error(err).target(CoilGraphicsImageViewTarget(iv, pic4Drawable)).build()
+    .data(url)
+    .placeholder(p)
+    .error(err)
+    .target(CoilGraphicsImageViewTarget(iv, pic1Drawable))
+    .build()
+    
 imageLoader.enqueue(request)
 
 ```
@@ -143,8 +149,13 @@ imageLoader.enqueue(request)
 - View 设置 背景
 
 ```kotlin
+val imageLoader = Coil.imageLoader(iv.context)
 val request = ImageRequest.Builder(iv.context)
-    .data(url).placeholder(p).error(err).target(CoilGraphicsViewBackgroundTarget(iv, pic4Drawable)).build()
+    .data(url)
+    .placeholder(p)
+    .error(err)
+    .target(CoilGraphicsViewBackgroundTarget(iv, pic4Drawable))
+    .build()
 imageLoader.enqueue(request)
 
 ```
