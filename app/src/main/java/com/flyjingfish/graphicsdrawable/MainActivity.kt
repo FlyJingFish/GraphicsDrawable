@@ -87,29 +87,29 @@ class MainActivity : AppCompatActivity() {
 
             val pic4Drawable = GraphicsDrawable(binding.iv4)
             pic4Drawable.setShapeType(GraphicsDrawable.ShapeType.CUSTOM)
-//            pic4Drawable.setCustomDrawable(resources.getDrawable(R.drawable.ic_vector_flower))
+            pic4Drawable.setCustomDrawable(resources.getDrawable(R.drawable.ic_vector_flower))
 
-            val uri = Uri.parse(
-                ContentResolver.SCHEME_ANDROID_RESOURCE
-                        + "://"
-                        + packageName
-                        + "/"
-                        + R.raw.dog_heart
-            )
-            Glide.with(this)
-                .`as`(PictureDrawable::class.java)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .load(uri).into(object : CustomTarget<PictureDrawable?>() {
-
-                    override fun onResourceReady(
-                        resource: PictureDrawable,
-                        transition: Transition<in PictureDrawable?>?
-                    ) {
-                        pic4Drawable.setCustomDrawable(resource)
-                    }
-
-                    override fun onLoadCleared(placeholder: Drawable?) {}
-                })
+//            val uri = Uri.parse(
+//                ContentResolver.SCHEME_ANDROID_RESOURCE
+//                        + "://"
+//                        + packageName
+//                        + "/"
+//                        + R.raw.dog_heart
+//            )
+//            Glide.with(this)
+//                .`as`(PictureDrawable::class.java)
+//                .transition(DrawableTransitionOptions.withCrossFade())
+//                .load(uri).into(object : CustomTarget<PictureDrawable?>() {
+//
+//                    override fun onResourceReady(
+//                        resource: PictureDrawable,
+//                        transition: Transition<in PictureDrawable?>?
+//                    ) {
+//                        pic4Drawable.setCustomDrawable(resource)
+//                    }
+//
+//                    override fun onLoadCleared(placeholder: Drawable?) {}
+//                })
 
             MyImageLoader.load(itemData,binding.iv1,R.mipmap.img_load_placeholder,R.mipmap.img_load_placeholder,pic1Drawable)
             MyImageLoader.load(itemData,binding.iv2,R.mipmap.img_load_placeholder,R.mipmap.img_load_placeholder,pic2Drawable)
