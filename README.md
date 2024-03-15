@@ -109,8 +109,8 @@ pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
 Glide
     .with(iv)
     .load(url)
-    .placeholder(p)
-    .error(err)
+    .placeholder(R.drawable.placeholder)
+    .error(R.drawable.error)
     .into(GlideGraphicsImageViewTarget(pic1Drawable))
 
 ```
@@ -120,8 +120,8 @@ Glide
 Glide
     .with(iv)
     .load(url)
-    .placeholder(p)
-    .error(err)
+    .placeholder(R.drawable.placeholder)
+    .error(R.drawable.error)
     .into(GlideGraphicsViewBackgroundTarget(pic1Drawable))
 ```
 
@@ -137,8 +137,8 @@ pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
 val imageLoader = Coil.imageLoader(iv.context)
 val request = ImageRequest.Builder(iv.context)
     .data(url)
-    .placeholder(p)
-    .error(err)
+    .placeholder(R.drawable.placeholder)
+    .error(R.drawable.error)
     .target(CoilGraphicsImageViewTarget(iv, pic1Drawable))
     .build()
     
@@ -152,8 +152,8 @@ imageLoader.enqueue(request)
 val imageLoader = Coil.imageLoader(iv.context)
 val request = ImageRequest.Builder(iv.context)
     .data(url)
-    .placeholder(p)
-    .error(err)
+    .placeholder(R.drawable.placeholder)
+    .error(R.drawable.error)
     .target(CoilGraphicsViewBackgroundTarget(iv, pic4Drawable))
     .build()
 imageLoader.enqueue(request)
