@@ -85,8 +85,10 @@ graphicsDrawable.setCustomDrawable(resources.getDrawable(R.drawable.ic_vector_fl
 ```kotlin
 //设置实际想要显示的Drawable
 graphicsDrawable.setDrawable(d)
-//给 view 设置 GraphicsDrawable 即可显示
+//给 ImageView 设置 GraphicsDrawable 即可显示
 view.setImageDrawable(graphicsDrawable)
+//给 view 设置背景
+view.setBackground(graphicsDrawable)
 ```
 
 ### 二、Glide 使用
