@@ -12,7 +12,9 @@
 ## 最重要的是不挑显示控件
 <img src="https://github.com/FlyJingFish/GraphicsDrawable/blob/master/screenshot/Screenshot_20240315_171632.jpg" width="400px" height="800px" alt="show" />
 
+#### [点此下载apk,也可扫下边二维码下载](https://github.com/FlyJingFish/GraphicsDrawable/blob/master/apk/release/app-release.apk?raw=true)
 
+<img src="/screenshot/qrcode.png" alt="show" width="200px" />
 
 ## 特色功能
 
