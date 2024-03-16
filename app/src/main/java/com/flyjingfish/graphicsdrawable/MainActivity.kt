@@ -50,7 +50,8 @@ class MainActivity : AppCompatActivity() {
             } else {
                 MyImageLoader.loadType = MyImageLoader.LoaderType.COIL
             }
-            setData()
+
+            resetData()
         }
         binding.cbUse.setOnCheckedChangeListener { _, isChecked ->
             MyImageLoader.useDrawable = isChecked
@@ -58,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 MyImageLoader.backgroundMode = false
                 binding.cbBackground.isChecked = false
             }
-            setData()
+            resetData()
         }
 
         binding.cbBackground.setOnCheckedChangeListener { _, isChecked ->
@@ -69,11 +70,31 @@ class MainActivity : AppCompatActivity() {
                 binding.iv3.setImageDrawable(null)
                 binding.iv4.setImageDrawable(null)
             }
-            setData()
+            pic1Drawable.setBackgroundMode(isChecked)
+            pic2Drawable.setBackgroundMode(isChecked)
+            pic3Drawable.setBackgroundMode(isChecked)
+            pic4Drawable.setBackgroundMode(isChecked)
+            resetData()
         }
         itemData =
             "https://pics4.baidu.com/feed/50da81cb39dbb6fd95aa0c599b8d0d1e962b3708.jpeg?token=bf17224f51a6f4bb389e787f9c487940"
         setData()
+    }
+
+    fun resetData(){
+        val lastData = itemData
+        itemData =
+            "https://pics4.baidu.comss/feed/50da81cb39dbb6fd95aa0c599b8d0d1e962b3708.jpeg?token=bf17224f51a6f4bb389e787f9c487940"
+        setData()
+        handler.postDelayed({
+            itemData = lastData
+            setData()
+            MyImageLoader.load(itemData,binding.iv1,R.mipmap.img_load_placeholder,R.mipmap.img_load_placeholder,pic1Drawable)
+            MyImageLoader.load(itemData,binding.iv2,R.mipmap.img_load_placeholder,R.mipmap.img_load_placeholder,pic2Drawable)
+            MyImageLoader.load(itemData,binding.iv3,R.mipmap.img_load_placeholder,R.mipmap.img_load_placeholder,pic3Drawable)
+            MyImageLoader.load(itemData,binding.iv4,R.mipmap.img_load_placeholder,R.mipmap.img_load_placeholder,pic4Drawable)
+        },1000L)
+
     }
 
     override fun onDestroy() {
@@ -200,6 +221,6 @@ class MainActivity : AppCompatActivity() {
             pic3Drawable.setScaleType(scaleType)
             pic4Drawable.setScaleType(scaleType)
         }
-        setData()
+//        resetData()
     }
 }
