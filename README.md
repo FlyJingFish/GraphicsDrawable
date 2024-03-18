@@ -10,7 +10,7 @@
 
 ## GraphicsDrawable支持圆图、圆角图以及自定义图形；不再需要学习各个图片加载框架各种设置圆角，圆形图，甚至任何的特殊图形也无缝支持；不需要再让 UI 切各种圆角、圆形图或其他图形的 placeholder、error 资源图
 ## 最重要的是不挑显示控件
-<img src="https://github.com/FlyJingFish/GraphicsDrawable/blob/master/screenshot/Screenshot_20240315_171632.jpg" width="400px" height="800px" alt="show" />
+<img src="https://github.com/FlyJingFish/GraphicsDrawable/blob/master/screenshot/Screenshot_20240318_102848.jpg" width="400px" height="800px" alt="show" />
 
 #### [点此下载apk,也可扫下边二维码下载](https://github.com/FlyJingFish/GraphicsDrawable/blob/master/apk/release/app-release.apk?raw=true)
 

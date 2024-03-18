@@ -238,7 +238,7 @@
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
                 android:onClick="onScaleTypeClick"
-                android:text="tv_fitCenter" />
+                android:text="fitCenter" />
             <RadioButton
                 android:id="@+id/tv_fitEnd"
                 android:layout_width="wrap_content"
@@ -246,7 +246,7 @@
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
                 android:onClick="onScaleTypeClick"
-                android:text="tv_fitEnd" />
+                android:text="fitEnd" />
 
 
 
