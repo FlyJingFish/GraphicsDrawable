@@ -144,7 +144,7 @@ val request = ImageRequest.Builder(context)
     
 imageLoader.enqueue(request)
 
-// 或者
+// 或者用 Coil 里 ImageView 的拓展函数
 
 imageView.load(url){
     placeholder(R.drawable.placeholder)
