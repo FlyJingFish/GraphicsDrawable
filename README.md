@@ -35,11 +35,11 @@
 ```gradle
 dependencies {
     //必选项
-    implementation 'io.github.FlyJingFish:GraphicsDrawable:1.0.2'
+    implementation 'io.github.FlyJingFish:GraphicsDrawable:1.0.3'
     //可选项，如果您使用 Glide 则使用这个
-    implementation 'io.github.FlyJingFish:GraphicsDrawableGlideLib:1.0.2'
+    implementation 'io.github.FlyJingFish:GraphicsDrawableGlideLib:1.0.3'
     //可选项，如果您使用 Coil 则使用这个
-    implementation 'io.github.FlyJingFish:GraphicsDrawableCoilLib:1.0.2'
+    implementation 'io.github.FlyJingFish:GraphicsDrawableCoilLib:1.0.3'
 }
 ```
 ## 第二步、使用说明
@@ -144,6 +144,14 @@ val request = ImageRequest.Builder(context)
     
 imageLoader.enqueue(request)
 
+// 或者
+
+imageView.load(url){
+    placeholder(R.drawable.placeholder)
+    error(R.drawable.error)
+    setGraphicsImageViewDrawable(pic1Drawable)
+}
+
 ```
 
 - View 设置 背景
@@ -161,6 +169,15 @@ val request = ImageRequest.Builder(context)
     .target(CoilGraphicsViewBackgroundTarget(pic4Drawable))
     .build()
 imageLoader.enqueue(request)
+
+
+// 或者
+
+imageView.load(url){
+    placeholder(R.drawable.placeholder)
+    error(R.drawable.error)
+    setGraphicsViewBackground(pic1Drawable)
+}
 
 ```
 
