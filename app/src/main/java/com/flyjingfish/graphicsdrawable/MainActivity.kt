@@ -32,18 +32,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         pic1Drawable = GraphicsDrawable(binding.iv1)
         pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
-        pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
+        pic1Drawable.setRadius(20.dp)
 
         pic2Drawable = GraphicsDrawable(binding.iv2)
         pic2Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
-        pic2Drawable.setRelativeRadius(MyImageLoader.dp2px(10f).toFloat(),MyImageLoader.dp2px(20f).toFloat(),MyImageLoader.dp2px(30f).toFloat(),MyImageLoader.dp2px(40f).toFloat())
+        pic2Drawable.setRelativeRadius(10.dp,20.dp,30.dp,40.dp)
 
         pic3Drawable = GraphicsDrawable(binding.iv3)
         pic3Drawable.setShapeType(GraphicsDrawable.ShapeType.OVAL)
 
         pic4Drawable = GraphicsDrawable(binding.iv4)
         pic4Drawable.setShapeType(GraphicsDrawable.ShapeType.CUSTOM)
-        pic4Drawable.setCustomDrawable(resources.getDrawable(R.drawable.ic_vector_flower))
+        pic4Drawable.setCustomDrawable(R.drawable.ic_vector_flower)
         binding.rgLoad.setOnCheckedChangeListener { _, checkedId ->
             if (checkedId == R.id.rb_glide) {
                 MyImageLoader.loadType = MyImageLoader.LoaderType.GLIDE

@@ -9,6 +9,6 @@ class MyApplication : Application() {
     }
 
     companion object {
-        var mInstance: MyApplication? = null
+        lateinit var mInstance: MyApplication
     }
 }

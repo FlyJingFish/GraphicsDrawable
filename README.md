@@ -61,13 +61,13 @@ dependencies {
 ```kotlin
 val graphicsDrawable = GraphicsDrawable(view)
 graphicsDrawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
-graphicsDrawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
+graphicsDrawable.setRadius(20.dp)
 ```
 - 四个角不同的矩形圆角图
 ```kotlin
 val graphicsDrawable = GraphicsDrawable(view)
 graphicsDrawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
-graphicsDrawable.setRelativeRadius(MyImageLoader.dp2px(10f).toFloat(),MyImageLoader.dp2px(20f).toFloat(),MyImageLoader.dp2px(30f).toFloat(),MyImageLoader.dp2px(40f).toFloat())
+graphicsDrawable.setRelativeRadius(10.dp,20.dp,30.dp,40.dp)
 
 ```
 - 圆形图
@@ -80,7 +80,7 @@ graphicsDrawable.setShapeType(GraphicsDrawable.ShapeType.OVAL)
 ```kotlin
 val graphicsDrawable = GraphicsDrawable(view)
 graphicsDrawable.setShapeType(GraphicsDrawable.ShapeType.CUSTOM)
-graphicsDrawable.setCustomDrawable(resources.getDrawable(R.drawable.ic_vector_flower))
+graphicsDrawable.setCustomDrawable(R.drawable.ic_vector_flower)
 
 ```
 - 将上述配置好的 GraphicsDrawable 设置给 View
@@ -101,7 +101,7 @@ view.setBackground(graphicsDrawable)
 ```kotlin
 val pic1Drawable = GraphicsDrawable(view)
 pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
-pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
+pic1Drawable.setRadius(20.dp)
 Glide
     .with(view)
     .load(url)
@@ -115,7 +115,7 @@ Glide
 ```kotlin
 val pic1Drawable = GraphicsDrawable(view)
 pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
-pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
+pic1Drawable.setRadius(20.dp)
 
 Glide
     .with(view)
@@ -132,7 +132,7 @@ Glide
 ```kotlin
 val pic1Drawable = GraphicsDrawable(view)
 pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
-pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
+pic1Drawable.setRadius(20.dp)
 
 val imageLoader = Coil.imageLoader(context)
 val request = ImageRequest.Builder(context)
@@ -151,7 +151,7 @@ imageLoader.enqueue(request)
 ```kotlin
 val pic1Drawable = GraphicsDrawable(view)
 pic1Drawable.setShapeType(GraphicsDrawable.ShapeType.RECTANGLE)
-pic1Drawable.setRadius(MyImageLoader.dp2px(20f).toFloat())
+pic1Drawable.setRadius(20.dp)
 
 val imageLoader = Coil.imageLoader(context)
 val request = ImageRequest.Builder(context)
