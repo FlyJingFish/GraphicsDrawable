@@ -69,6 +69,11 @@ class MainActivity : AppCompatActivity() {
                 binding.iv2.setImageDrawable(null)
                 binding.iv3.setImageDrawable(null)
                 binding.iv4.setImageDrawable(null)
+            }else{
+                binding.iv1.background = null
+                binding.iv2.background = null
+                binding.iv3.background = null
+                binding.iv4.background = null
             }
             pic1Drawable.setBackgroundMode(isChecked)
             pic2Drawable.setBackgroundMode(isChecked)
