@@ -166,7 +166,7 @@ val request = ImageRequest.Builder(context)
     .data(url)
     .placeholder(R.drawable.placeholder)
     .error(R.drawable.error)
-    .target(CoilGraphicsViewBackgroundTarget(pic4Drawable))
+    .target(CoilGraphicsViewBackgroundTarget(pic1Drawable))
     .build()
 imageLoader.enqueue(request)
 
