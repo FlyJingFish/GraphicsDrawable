@@ -170,15 +170,6 @@ val request = ImageRequest.Builder(context)
     .build()
 imageLoader.enqueue(request)
 
-
-// 或者
-
-imageView.load(url){
-    placeholder(R.drawable.placeholder)
-    error(R.drawable.error)
-    setGraphicsViewBackground(pic1Drawable)
-}
-
 ```
 
 ### 四、番外：使用 svg 资源图作为自定义图形
